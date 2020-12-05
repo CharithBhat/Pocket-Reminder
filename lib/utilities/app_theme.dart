@@ -39,7 +39,8 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     appBarTheme: AppBarTheme(
-      color: Colors.blue[900],
+      //color: Colors.blue[900],
+      color: Colors.red,
       // iconTheme: IconThemeData(
       //   color: Colors.white,
       // ),
@@ -49,7 +50,8 @@ class AppTheme {
     ),
     cardColor: Colors.white,
     splashColor: Colors.grey,
-    primaryColor: Colors.blue[900],
+    //primaryColor: Colors.blue[900],
+    primaryColor: Colors.red,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
     accentColor: Colors.white,

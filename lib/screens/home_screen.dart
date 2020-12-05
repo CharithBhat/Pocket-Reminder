@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/screens/settings_screen.dart';
 import '../widgets/place_holder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,11 +9,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
-    PlaceholderWidget(Colors.deepOrange),
-    PlaceholderWidget(Colors.green),
-  ];
 
   void onTabTapped(int index) {
     setState(() {
@@ -22,9 +18,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _children = [
+      PlaceholderWidget(Colors.white),
+      PlaceholderWidget(Colors.orange),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo Application'),
+        title: Text(
+          'Todo Application',
+          style: Theme.of(context).appBarTheme.textTheme.headline1,
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Theme.of(context).appBarTheme.color,
+        elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            tooltip: "goes to the settings page",
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SettingsScreen();
+                  },
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

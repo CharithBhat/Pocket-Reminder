@@ -5,28 +5,30 @@ import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AppThemeNotifier>(
-           create: (context) => AppThemeNotifier(),
-        ),
-      ],
-      child: MyApp(),
-    )
-    );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AppThemeNotifier>(
+        create: (context) => AppThemeNotifier(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: HomeScreen(),
+    return Consumer<AppThemeNotifier>(
+      builder: (context, appTheme, child) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: appTheme.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+          home: HomeScreen(),
+        );
+      },
     );
   }
 }
-
