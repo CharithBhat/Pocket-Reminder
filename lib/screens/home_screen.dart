@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_application/models/todo.dart';
 import 'package:todo_application/screens/settings_screen.dart';
-import '../widgets/place_holder.dart';
+import 'package:todo_application/widgets/all_tasks.dart';
+import 'package:todo_application/widgets/completed_tasks.dart';
+import '../provider/todo_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children = [
-      PlaceholderWidget(Colors.white),
-      PlaceholderWidget(Colors.orange),
+      AllTasks(),
+      CompletedTasks(),
     ];
 
     return Scaffold(
@@ -50,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped, // new
+        onTap: onTabTapped, 
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
@@ -62,6 +66,21 @@ class _HomeScreenState extends State<HomeScreen> {
             title: new Text('completed'),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Provider.of<TodoList>(context,listen: false).addTodo(
+            Todo(
+              id: 1,
+              title: "nothing",
+              description: "nothing much",
+              date: DateTime.now(),
+              completed: false,
+            ),
+          );
+        },
+        child: Icon(Icons.navigation),
+        backgroundColor: Colors.green,
       ),
     );
   }

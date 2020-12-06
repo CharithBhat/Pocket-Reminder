@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/provider/app_theme_notifier.dart';
+import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
 
@@ -9,6 +10,9 @@ void main() {
     providers: [
       ChangeNotifierProvider<AppThemeNotifier>(
         create: (context) => AppThemeNotifier(),
+      ),
+      ChangeNotifierProvider<TodoList>(
+        create: (context) => TodoList(),
       ),
     ],
     child: MyApp(),
