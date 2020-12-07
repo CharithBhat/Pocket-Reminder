@@ -5,6 +5,7 @@ import 'package:todo_application/screens/settings_screen.dart';
 import 'package:todo_application/widgets/all_tasks.dart';
 import 'package:todo_application/widgets/completed_tasks.dart';
 import '../provider/todo_list.dart';
+import '../widgets/add_todo_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -54,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped, 
+        onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
@@ -69,15 +70,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<TodoList>(context,listen: false).addTodo(
-            Todo(
-              id: 1,
-              title: "nothing",
-              description: "nothing much",
-              date: DateTime.now(),
-              completed: false,
-            ),
-          );
+          // Provider.of<TodoList>(context,listen: false).addTodo(
+          //   Todo(
+          //     id: 1,
+          //     title: "nothing",
+          //     description: "nothing much",
+          //     date: DateTime.now(),
+          //     completed: false,
+          //   ),
+          // );
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: AddTodoDialog(),
+          );  
         },
         child: Icon(Icons.navigation),
         backgroundColor: Colors.green,
