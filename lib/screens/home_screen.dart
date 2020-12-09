@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_application/models/todo.dart';
 import 'package:todo_application/screens/settings_screen.dart';
 import 'package:todo_application/widgets/all_tasks.dart';
 import 'package:todo_application/widgets/completed_tasks.dart';
-import '../provider/todo_list.dart';
 import '../widgets/add_todo_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -70,18 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Provider.of<TodoList>(context,listen: false).addTodo(
-          //   Todo(
-          //     id: 1,
-          //     title: "nothing",
-          //     description: "nothing much",
-          //     date: DateTime.now(),
-          //     completed: false,
-          //   ),
-          // );
           showDialog(
             context: context,
-            barrierDismissible: false,
+            barrierDismissible: true,
             child: AddTodoDialog(),
           );  
         },

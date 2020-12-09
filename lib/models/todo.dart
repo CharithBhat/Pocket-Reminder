@@ -1,9 +1,9 @@
 class Todo {
-  final int id;
-  final String title;
-  final String description;
-  final bool completed;
-  final DateTime date;
+  int id;
+  String title;
+  String description;
+  bool completed;
+  DateTime date;
 
   Todo({
     this.id,
@@ -12,4 +12,5 @@ class Todo {
     this.completed,
     this.date,
   });
+
 }

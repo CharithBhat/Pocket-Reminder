@@ -16,32 +16,38 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
 
   @override
   Widget build(BuildContext context) {
+    //var height = MediaQuery.of(context).size.height;
+    //var width = MediaQuery.of(context).size.width;
     return AlertDialog(
-      content: Column(
-        children: [
-          Form(
-            key: _formkey,
-            child: Column(
-              children: [
-                Text('Add todo'),
-                SizedBox(height: 8),
-                TodoFormWidget(
-                  onChangedTitle: (title) {
-                    setState(() {
-                      this.title = title;
-                    });
-                  },
-                  onChangedDescription: (description) {
-                    setState(() {
-                      this.description = description;
-                    });
-                  },
-                  onSavedTodo: addTodo,
-                ),
-              ],
-            ),
-          ), // here is where the todoform widget goes
-        ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      content: Container(
+        // height: height / 3,
+        // width: width / 2,
+        child: Form(
+          key: _formkey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Add todo'),
+              SizedBox(height: 8),
+              TodoFormWidget(
+                onChangedTitle: (title) {
+                  setState(() {
+                    this.title = title;
+                  });
+                },
+                onChangedDescription: (description) {
+                  setState(() {
+                    this.description = description;
+                  });
+                },
+                onSavedTodo: addTodo,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

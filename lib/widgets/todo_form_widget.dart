@@ -32,7 +32,13 @@ class TodoFormWidget extends StatelessWidget {
 
   Widget buildTitle() {
     return TextFormField(
-      initialValue: title,
+      //initialValue: title,
+      maxLines: 1,
+      decoration: InputDecoration(
+        border: UnderlineInputBorder(
+        ),
+        labelText: 'title',
+      ),
       onChanged: onChangedTitle,
       validator: (value) {
         if (value.isEmpty) {
@@ -45,7 +51,18 @@ class TodoFormWidget extends StatelessWidget {
 
   Widget buildDescription() {
     return TextFormField(
-      initialValue: description,
+      maxLines: 1,
+      //initialValue: description,
+      decoration: InputDecoration(
+        border: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(
+            color: Colors.amber,
+            style: BorderStyle.solid,
+          ),
+        ),
+        labelText: 'description',
+      ),
       onChanged: onChangedDescription,
       validator: (value) {
         if (value.isEmpty) {

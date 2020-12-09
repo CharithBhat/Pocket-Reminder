@@ -4,19 +4,27 @@ import 'package:todo_application/provider/app_theme_notifier.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<AppThemeNotifier>(
-        create: (context) => AppThemeNotifier(),
-      ),
-      ChangeNotifierProvider<TodoList>(
-        create: (context) => TodoList(),
-      ),
-    ],
-    child: MyApp(),
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (_) {
+      runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider<AppThemeNotifier>(
+              create: (context) => AppThemeNotifier(),
+            ),
+            ChangeNotifierProvider<TodoList>(
+              create: (context) => TodoList(),
+            ),
+          ],
+          child: MyApp(),
+        ),
+      );
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -33,12 +33,28 @@ class TodoList with ChangeNotifier {
     ),
   ];
 
-  List<Todo> get todoList{
+  List<Todo> get todoList {
     return _todoList;
   }
 
-  void addTodo(Todo todo){
+  void addTodo(Todo todo) {
     _todoList.add(todo);
+    notifyListeners();
+  }
+
+  void toggleCompletion(Todo todo) {
+    todo.completed = !todo.completed;
+    notifyListeners();
+  }
+
+  void removeTodo(Todo todo){
+    _todoList.remove(todo);
+    notifyListeners();
+  }
+
+  void updateTodo(Todo todo, String title, String description){
+    todo.title = title;
+    todo.description = description;
     notifyListeners();
   }
 }

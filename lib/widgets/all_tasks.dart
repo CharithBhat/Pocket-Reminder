@@ -28,6 +28,7 @@ class AllTasks extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          onTap: () => provider.toggleCompletion(provider.todoList[index]),
           title: Text(
             provider.todoList[index].title,
           ),
