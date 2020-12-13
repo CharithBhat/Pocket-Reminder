@@ -8,8 +8,8 @@ class TodoFormWidget extends StatelessWidget {
   final VoidCallback onSavedTodo;
 
   TodoFormWidget({
-    this.title,
-    this.description,
+    this.title = '',
+    this.description = '',
     @required this.onChangedTitle,
     @required this.onChangedDescription,
     @required this.onSavedTodo,
@@ -32,7 +32,7 @@ class TodoFormWidget extends StatelessWidget {
 
   Widget buildTitle() {
     return TextFormField(
-      //initialValue: title,
+      initialValue: title,
       maxLines: 1,
       decoration: InputDecoration(
         border: UnderlineInputBorder(
@@ -52,7 +52,7 @@ class TodoFormWidget extends StatelessWidget {
   Widget buildDescription() {
     return TextFormField(
       maxLines: 1,
-      //initialValue: description,
+      initialValue: description,
       decoration: InputDecoration(
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(5),
