@@ -49,7 +49,7 @@ class AllTasks extends StatelessWidget {
           )
         ],
         child: GestureDetector(
-          onTap: () => editTodo(context, provider.todoList[index]),
+          // onTap: () => editTodo(context, provider.todoList[index]),
           child: Column(
             children: [
               ListTile(
@@ -62,13 +62,24 @@ class AllTasks extends StatelessWidget {
                   provider.todoList[index].description,
                 ),
                 leading: provider.todoList[index].completed
-                    ? Icon(
-                        Icons.check_circle,
-                        color: Colors.greenAccent,
+                    ? Container(
+                        margin: EdgeInsets.all(5),
+                        color: Colors.green,
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
                       )
-                    : Icon(
-                        Icons.check_box,
-                        color: Colors.orangeAccent,
+                    : Container(
+                        width: 25,
+                        height: 25,
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 3,
+                            color: Colors.green,
+                          ),
+                        ),
                       ),
               ),
               Divider(thickness: 2),

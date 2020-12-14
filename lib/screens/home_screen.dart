@@ -71,9 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
             context: context,
             barrierDismissible: true,
             child: AddTodoDialog(),
-          );  
+          );
         },
-        child: Icon(Icons.navigation),
+        child: Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.green,
       ),
     );

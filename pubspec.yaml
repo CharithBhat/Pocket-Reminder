@@ -31,6 +31,8 @@ dependencies:
   google_fonts:
   provider:
   flutter_slidable:
+  sqflite:
+  path:
 
 dev_dependencies:
   flutter_test:

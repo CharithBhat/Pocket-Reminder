@@ -13,9 +13,14 @@ class CompletedTasks extends StatelessWidget {
         child: Consumer<TodoList>(
           builder: (context, provider, child) {
             return ListView.builder(
-              itemCount: provider.todoList.where((element) => element.completed).length + 1,
+              itemCount: provider.todoList
+                      .where((element) => element.completed)
+                      .length +
+                  1,
               itemBuilder: (BuildContext context, int index) {
-                return provider.todoList[index].completed ?  singleItem(index, provider) : Container();
+                return provider.todoList[index].completed
+                    ? singleItem(index, provider)
+                    : Container();
               },
             );
           },
@@ -35,13 +40,24 @@ class CompletedTasks extends StatelessWidget {
             provider.todoList[index].description,
           ),
           leading: provider.todoList[index].completed
-              ? Icon(
-                  Icons.check_circle,
-                  color: Colors.greenAccent,
+              ? Container(
+                  margin: EdgeInsets.all(5),
+                  color: Colors.green,
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
                 )
-              : Icon(
-                  Icons.check_box,
-                  color: Colors.orangeAccent,
+              : Container(
+                  width: 25,
+                  height: 25,
+                  margin: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.green,
+                    ),
+                  ),
                 ),
         ),
         Divider(thickness: 2),

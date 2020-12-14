@@ -18,44 +18,68 @@ class _EditScreenState extends State<EditScreen> {
   String description = '';
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-        // height: height / 3,
-        // width: width / 2,
-        child: Form(
-          key: _formkey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Edit Todo'),
-              SizedBox(height: 8),
-              TodoFormWidget(
-                title: title,
-                description: description,
-                onChangedTitle: (title) {
-                  setState(() {
-                    widget.todo.title = title;
-                  });
-                },
-                onChangedDescription: (description) {
-                  setState(() {
-                    widget.todo.description = description;
-                  });
-                },
-                onSavedTodo: editTodo,
-              ),
-            ],
-          ),
-        ),
-      );
+  void initState() {
+    super.initState();
+    title = widget.todo.title;
+    description = widget.todo.description;
   }
 
-  void editTodo(){
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              final provider = Provider.of<TodoList>(context, listen: false);
+              provider.removeTodo(widget.todo);
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          // height: height / 3,
+          // width: width / 2,
+          child: Form(
+            key: _formkey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Edit Todo'),
+                SizedBox(height: 8),
+                TodoFormWidget(
+                  title: title,
+                  description: description,
+                  onChangedTitle: (title) {
+                    setState(() {
+                      this.title = title;
+                    });
+                  },
+                  onChangedDescription: (description) {
+                    setState(() {
+                      this.description = description;
+                    });
+                  },
+                  onSavedTodo: editTodo,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void editTodo() {
     final isValid = _formkey.currentState.validate();
     if (!isValid) {
       return;
     } else {
-      final provider = Provider.of<TodoList>(context);
+      final provider = Provider.of<TodoList>(context,listen: false);
       provider.updateTodo(widget.todo, title, description);
       Navigator.of(context).pop();
     }
