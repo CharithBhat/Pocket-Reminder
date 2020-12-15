@@ -13,4 +13,13 @@ class Todo {
     this.date,
   });
 
+  Map<String, dynamic> toMap(){
+    return {
+      'id' : id,
+      'title': title,
+      'description': description,
+      'completed' : completed,
+      'date' : date,
+    };
+  }
 }

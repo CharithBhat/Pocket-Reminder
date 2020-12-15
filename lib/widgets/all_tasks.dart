@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
-class AllTasks extends StatelessWidget {
+class AllTasks extends StatefulWidget {
+  @override
+  _AllTasksState createState() => _AllTasksState();
+}
+
+class _AllTasksState extends State<AllTasks> {
+  @override
+  void initState(){
+    super.initState();
+    final provider = Provider.of<TodoList>(context, listen: false);
+    final dbhelper = DatabaseHelper.instance;
+    dbhelper.queryall().then(
+          (value) => value.map(
+            (todo) {
+              provider.addTodo(todo);
+            },
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
-    //final provider = Provider.of<TodoList>(context, listen: true);
-
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0, left: 16),
@@ -99,9 +118,23 @@ class AllTasks extends StatelessWidget {
   }
 
   void deleteTodo(BuildContext context, Todo todo) {
+    final dbhelper = DatabaseHelper.instance; // new
     final provider = Provider.of<TodoList>(context, listen: false);
+    dbhelper.deleteTodo(todo.id); // new
     provider.removeTodo(todo);
     final snackBar = SnackBar(content: Text('Deleted'));
     Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  Future<Todo> getStuff(){
+    final provider = Provider.of<TodoList>(context, listen: false);
+    final dbhelper = DatabaseHelper.instance;
+    dbhelper.queryall().then(
+          (value) => value.map(
+            (todo) {
+              provider.addTodo(todo);
+            },
+          ),
+        );
   }
 }

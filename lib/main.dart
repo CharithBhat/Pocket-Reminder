@@ -6,7 +6,7 @@ import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {

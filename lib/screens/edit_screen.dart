@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/widgets/todo_form_widget.dart';
@@ -80,6 +81,8 @@ class _EditScreenState extends State<EditScreen> {
       return;
     } else {
       final provider = Provider.of<TodoList>(context,listen: false);
+      final dbhelper = DatabaseHelper.instance;
+      dbhelper.updateTodo(widget.todo);
       provider.updateTodo(widget.todo, title, description);
       Navigator.of(context).pop();
     }

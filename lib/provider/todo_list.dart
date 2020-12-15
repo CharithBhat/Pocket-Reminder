@@ -3,34 +3,34 @@ import 'package:todo_application/models/todo.dart';
 
 class TodoList with ChangeNotifier {
   List<Todo> _todoList = [
-    Todo(
-      id: "1",
-      title: 'read books',
-      description: 'read novels',
-      completed: true,
-      date: DateTime.now(),
-    ),
-    Todo(
-      id: "2",
-      title: 'breakfast',
-      description: 'read novels',
-      completed: false,
-      date: DateTime.now(),
-    ),
-    Todo(
-      id: "3",
-      title: 'lunch',
-      description: 'read novels',
-      completed: true,
-      date: DateTime.now(),
-    ),
-    Todo(
-      id: "4",
-      title: 'dinner',
-      description: 'read novels',
-      completed: true,
-      date: DateTime.now(),
-    ),
+    // Todo(
+    //   id: "1",
+    //   title: 'read books',
+    //   description: 'read novels',
+    //   completed: true,
+    //   date: DateTime.now(),
+    // ),
+    // Todo(
+    //   id: "2",
+    //   title: 'breakfast',
+    //   description: 'read novels',
+    //   completed: false,
+    //   date: DateTime.now(),
+    // ),
+    // Todo(
+    //   id: "3",
+    //   title: 'lunch',
+    //   description: 'read novels',
+    //   completed: true,
+    //   date: DateTime.now(),
+    // ),
+    // Todo(
+    //   id: "4",
+    //   title: 'dinner',
+    //   description: 'read novels',
+    //   completed: true,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   List<Todo> get todoList {
