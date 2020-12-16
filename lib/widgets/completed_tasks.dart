@@ -14,11 +14,10 @@ class CompletedTasks extends StatelessWidget {
           builder: (context, provider, child) {
             return ListView.builder(
               itemCount: provider.todoList
-                      .where((element) => element.completed)
-                      .length +
-                  1,
+                  .where((element) => element.completed == 1)
+                  .length,
               itemBuilder: (BuildContext context, int index) {
-                return provider.todoList[index].completed
+                return provider.todoList[index].completed == 1
                     ? singleItem(index, provider)
                     : Container();
               },
@@ -39,7 +38,7 @@ class CompletedTasks extends StatelessWidget {
           subtitle: Text(
             provider.todoList[index].description,
           ),
-          leading: provider.todoList[index].completed
+          leading: provider.todoList[index].completed == 1
               ? Container(
                   margin: EdgeInsets.all(5),
                   color: Colors.green,

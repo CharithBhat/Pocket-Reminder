@@ -42,12 +42,12 @@ class DatabaseHelper {
     // sql code
     await db.execute('''
       CREATE TABLE $table (
-        id INTEGER PRIMARY KEY,
+        id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         description TEXT NOT NULL,
         completed INTEGER,
-        date TEXT NOT NULL,
-      );
+        date TEXT NOT NULL
+      )
       ''');
   }
 
@@ -65,6 +65,8 @@ class DatabaseHelper {
   Future<List<Todo>> queryall() async {
     Database db = await instance.databse;
     final List<Map<String, dynamic>> maps = await db.query(table);
+    print(maps);
+    print('thats all');
     return List.generate(
       maps.length,
       (index) {

@@ -43,7 +43,8 @@ class TodoList with ChangeNotifier {
   }
 
   void toggleCompletion(Todo todo) {
-    todo.completed = !todo.completed;
+    if(todo.completed == 1) todo.completed = todo.completed -1;
+    else{todo.completed = todo.completed + 1;}
     notifyListeners();
   }
 

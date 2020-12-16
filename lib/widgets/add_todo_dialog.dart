@@ -60,10 +60,11 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       return;
     } else {
       final todo = Todo(
+        id: DateTime.now().toIso8601String(),
         title: title,
         description: description,
-        date: DateTime.now(),
-        completed: false,
+        date: DateTime.now().toIso8601String(),
+        completed: 0,
       );
       final provider = Provider.of<TodoList>(context, listen: false);
       final dbhelper = DatabaseHelper.instance;

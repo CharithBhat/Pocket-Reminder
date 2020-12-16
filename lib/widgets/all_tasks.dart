@@ -14,7 +14,7 @@ class AllTasks extends StatefulWidget {
 
 class _AllTasksState extends State<AllTasks> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     final provider = Provider.of<TodoList>(context, listen: false);
     final dbhelper = DatabaseHelper.instance;
@@ -72,15 +72,16 @@ class _AllTasksState extends State<AllTasks> {
           child: Column(
             children: [
               ListTile(
-                onTap: () =>
-                    provider.toggleCompletion(provider.todoList[index]),
+                onTap: () {
+                  provider.toggleCompletion(provider.todoList[index]);
+                },
                 title: Text(
                   provider.todoList[index].title,
                 ),
                 subtitle: Text(
                   provider.todoList[index].description,
                 ),
-                leading: provider.todoList[index].completed
+                leading: provider.todoList[index].completed == 1
                     ? Container(
                         margin: EdgeInsets.all(5),
                         color: Colors.green,
@@ -124,17 +125,5 @@ class _AllTasksState extends State<AllTasks> {
     provider.removeTodo(todo);
     final snackBar = SnackBar(content: Text('Deleted'));
     Scaffold.of(context).showSnackBar(snackBar);
-  }
-
-  Future<Todo> getStuff(){
-    final provider = Provider.of<TodoList>(context, listen: false);
-    final dbhelper = DatabaseHelper.instance;
-    dbhelper.queryall().then(
-          (value) => value.map(
-            (todo) {
-              provider.addTodo(todo);
-            },
-          ),
-        );
   }
 }

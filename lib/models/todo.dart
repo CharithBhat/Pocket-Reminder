@@ -2,8 +2,8 @@ class Todo {
   String id;
   String title;
   String description;
-  bool completed;
-  DateTime date;
+  int completed;
+  String date;
 
   Todo({
     this.id,
