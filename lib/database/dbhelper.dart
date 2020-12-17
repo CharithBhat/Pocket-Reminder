@@ -96,4 +96,15 @@ class DatabaseHelper {
       whereArgs: [todo.id],
     );
   }
+
+  Future<void> toggleTodo(Todo todo) async {
+    final db = await instance.databse;
+    todo.completed == 1 ? todo.completed = 0 : todo.completed = 1;
+    await db.update(
+      table,
+      todo.toMap(),
+      where: "id = ?",
+      whereArgs: [todo.id],
+    );
+  }
 }
