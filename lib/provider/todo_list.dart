@@ -3,15 +3,6 @@ import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
 
 class TodoList with ChangeNotifier {
-  final dbhelper = DatabaseHelper.instance;
-
-  // List<Todo> get todoList {
-  //   return _todoList;
-  // }
-
-  void refresh() {
-    notifyListeners();
-  }
 
   // void toggleCompletion(Todo todo) {
   //   if(todo.completed == 1) todo.completed = todo.completed -1;
@@ -29,5 +20,11 @@ class TodoList with ChangeNotifier {
   //   todo.description = description;
   //   notifyListeners();
   // }
+
+  List<Todo> todoList = [];
+  final dbhelper = DatabaseHelper.instance;
+  
+  
+
 }
 

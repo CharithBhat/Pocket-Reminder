@@ -3,7 +3,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
-import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
 class AllTasks extends StatefulWidget {
@@ -44,22 +43,41 @@ class _AllTasksState extends State<AllTasks> {
     //   ),
     // );
     final dbhelper = DatabaseHelper.instance;
-    return FutureBuilder(
-      future: dbhelper.queryall(),
-      builder: (context, AsyncSnapshot<List<Todo>> snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return singleItem(index, snapshot.data[index], context);
-            },
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+    // return FutureBuilder(
+    //   future: dbhelper.queryall(),
+    //   builder: (context, AsyncSnapshot<List<Todo>> snapshot) {
+    //     if (snapshot.hasData) {
+    //       return ListView.builder(
+    //         itemCount: snapshot.data.length,
+    //         itemBuilder: (BuildContext context, int index) {
+    //           return singleItem(index, snapshot.data[index], context);
+    //         },
+    //       );
+    //     } else {
+    //       return Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     }
+    //   },
+    // );
+
+    return FutureProvider(
+      create: (_) => dbhelper.queryall(),
+      child: Consumer<List<Todo>>(
+        builder: (context, todo, _) {
+          return todo == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                  itemCount: todo.length,
+                  itemBuilder: (context, index) {
+                    var tod = todo[index];
+                    return singleItem(index, tod, context);
+                  },
+                );
+        },
+      ),
     );
   }
 
