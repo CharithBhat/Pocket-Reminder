@@ -23,8 +23,10 @@ class TodoList with ChangeNotifier {
 
   List<Todo> todoList = [];
   final dbhelper = DatabaseHelper.instance;
-  
-  
 
+  Future<void> getData() async {
+    todoList = await dbhelper.queryall();
+    notifyListeners();
+  }
 }
 

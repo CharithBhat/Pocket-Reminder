@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
 class AllTasks extends StatefulWidget {
@@ -79,6 +80,22 @@ class _AllTasksState extends State<AllTasks> {
         },
       ),
     );
+
+    // return ChangeNotifierProvider<TodoList>(
+    //   create: (context) => TodoList(),
+    //   child: Consumer<TodoList>(builder: (context, provider, child) {
+    //     if(provider.todoList == null){
+    //       provider.getData();
+    //       return Center(child: CircularProgressIndicator());
+    //     }
+    //     return ListView.builder(
+    //       itemCount: provider.todoList.length,
+    //       itemBuilder: (BuildContext context, int index){
+    //         return singleItem(index, provider.todoList, context);
+    //       },
+    //     );
+    //   }),
+    // );
   }
 
   Widget singleItem(int index, snapshot, BuildContext context) {
