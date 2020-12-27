@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_application/database/dbhelper.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/widgets/todo_form_widget.dart';
 
 class AddTodoDialog extends StatefulWidget {
@@ -64,13 +65,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
         date: DateTime.now().toIso8601String(),
         completed: 0,
       );
-      //final provider = Provider.of<TodoList>(context, listen: false);
-      final dbhelper = DatabaseHelper.instance;
-      dbhelper.insertTodo(todo);
-      //provider.addTodo(todo);
+      final provider = Provider.of<TodoList>(context, listen: false);
+      provider.addTodo(todo);
       Navigator.of(context).pop();
-      setState(() {
-      });
     }
   }
 }

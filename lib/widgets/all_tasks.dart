@@ -13,37 +13,50 @@ class AllTasks extends StatefulWidget {
 
 class _AllTasksState extends State<AllTasks> {
   @override
-  void initState() {
+  // void initState() {
+  //   super.initState();
+  //   final provider = Provider.of<TodoList>(context, listen: false);
+  //   final dbhelper = DatabaseHelper.instance;
+  //   dbhelper.queryall().then(
+  //         (value) => value.map(
+  //           (todo) {
+  //             provider.addTodo(todo);
+  //           },
+  //         ),
+  //       );
+  // }
+
+  void initState(){
     super.initState();
-    // final provider = Provider.of<TodoList>(context, listen: false);
-    // final dbhelper = DatabaseHelper.instance;
-    // dbhelper.queryall().then(
-    //       (value) => value.map(
-    //         (todo) {
-    //           provider.addTodo(todo);
-    //         },
-    //       ),
-    //     );
+    getitems();
+  }
+
+  void getitems() async{
+    final provider = Provider.of<TodoList>(context,listen: false);
+    final dbhelper = DatabaseHelper.instance;
+    final theList = await dbhelper.queryall();
+    for(var item in theList){
+      provider.addTodo(item);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   child: Padding(
-    //     padding: const EdgeInsets.only(top: 16.0, left: 16),
-    //     child: Consumer<TodoList>(
-    //       builder: (context, provider, child) {
-    //         return ListView.builder(
-    //           itemCount: provider.todoList.length,
-    //           itemBuilder: (BuildContext context, int index) {
-    //             return singleItem(index, provider, context);
-    //           },
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
-    final dbhelper = DatabaseHelper.instance;
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16.0, left: 16),
+        child: Consumer<TodoList>(
+          builder: (context, provider, child) {
+            return ListView.builder(
+              itemCount: provider.todoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return singleItem(index, provider.todoList[index], context);
+              },
+            );
+          },
+        ),
+      ),
+    );
     // return FutureBuilder(
     //   future: dbhelper.queryall(),
     //   builder: (context, AsyncSnapshot<List<Todo>> snapshot) {
@@ -62,24 +75,24 @@ class _AllTasksState extends State<AllTasks> {
     //   },
     // );
 
-    return FutureProvider(
-      create: (_) => dbhelper.queryall(),
-      child: Consumer<List<Todo>>(
-        builder: (context, todo, _) {
-          return todo == null
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ListView.builder(
-                  itemCount: todo.length,
-                  itemBuilder: (context, index) {
-                    var tod = todo[index];
-                    return singleItem(index, tod, context);
-                  },
-                );
-        },
-      ),
-    );
+    // return FutureProvider(
+    //   create: (_) => dbhelper.queryall(),
+    //   child: Consumer<List<Todo>>(
+    //     builder: (context, todo, _) {
+    //       return todo == null
+    //           ? Center(
+    //               child: CircularProgressIndicator(),
+    //             )
+    //           : ListView.builder(
+    //               itemCount: todo.length,
+    //               itemBuilder: (context, index) {
+    //                 var tod = todo[index];
+    //                 return singleItem(index, tod, context);
+    //               },
+    //             );
+    //     },
+    //   ),
+    // );
 
     // return ChangeNotifierProvider<TodoList>(
     //   create: (context) => TodoList(),
@@ -99,7 +112,7 @@ class _AllTasksState extends State<AllTasks> {
   }
 
   Widget singleItem(int index, snapshot, BuildContext context) {
-    final dbhelper = DatabaseHelper.instance;
+    final provider = Provider.of<TodoList>(context, listen: false);
     return ClipRect(
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
@@ -117,11 +130,7 @@ class _AllTasksState extends State<AllTasks> {
             color: Colors.red,
             caption: 'Delete',
             onTap: () {
-              setState(() {
-                dbhelper.deleteTodo(snapshot.id);
-              });
-              // final provider = Provider.of<TodoList>(context, listen: false);
-              // provider.refresh();
+              provider.removeTodo(snapshot);
               final snackBar = SnackBar(content: Text('Deleted'));
               Scaffold.of(context).showSnackBar(snackBar);
             },
@@ -134,11 +143,11 @@ class _AllTasksState extends State<AllTasks> {
             children: [
               ListTile(
                 onTap: () {
-                  //provider.toggleCompletion(provider.todoList[index]);
+                  provider.toggleCompletion(snapshot);
                   //dbhelper.updateTodo(snapshot);
-                  setState(() {
-                    dbhelper.toggleTodo(snapshot);
-                  });
+                  // setState(() {
+                  //   dbhelper.toggleTodo(snapshot);
+                  // });
                   // final provider = Provider.of<TodoList>(context, listen: false);
                   // provider.refresh();
                 },
