@@ -30,6 +30,8 @@ class TodoList with ChangeNotifier {
   void updateTodo(Todo todo, String title, String description) {
     todo.title = title;
     todo.description = description;
+    todo.title = title;
+    todo.description = description;
     dbhelper.updateTodo(todo);
     notifyListeners();
   }

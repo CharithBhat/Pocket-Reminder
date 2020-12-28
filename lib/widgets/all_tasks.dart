@@ -26,20 +26,6 @@ class _AllTasksState extends State<AllTasks> {
   //       );
   // }
 
-  void initState(){
-    super.initState();
-    getitems();
-  }
-
-  void getitems() async{
-    final provider = Provider.of<TodoList>(context,listen: false);
-    final dbhelper = DatabaseHelper.instance;
-    final theList = await dbhelper.queryall();
-    for(var item in theList){
-      provider.addTodo(item);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(

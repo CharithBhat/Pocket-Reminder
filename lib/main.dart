@@ -6,8 +6,12 @@ import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
 import 'package:flutter/services.dart';
 
-void main() async{
+import 'database/dbhelper.dart';
+
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
       runApp(
@@ -27,7 +31,26 @@ void main() async{
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  void initState(){
+    super.initState();
+    getitems();
+  }
+
+  void getitems() async{
+    final provider = Provider.of<TodoList>(context,listen: false);
+    final dbhelper = DatabaseHelper.instance;
+    final theList = await dbhelper.queryall();
+    for(var item in theList){
+      provider.addTodo(item);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<AppThemeNotifier>(
