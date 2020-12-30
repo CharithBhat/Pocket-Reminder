@@ -10,7 +10,6 @@ import 'database/dbhelper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppThemeNotifier();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
@@ -40,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     getitems();
+     AppThemeNotifier().loadFromPrefs();
   }
 
   void getitems() async {
