@@ -8,10 +8,10 @@ import 'package:flutter/services.dart';
 
 import 'database/dbhelper.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+  AppThemeNotifier();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
       runApp(
@@ -37,20 +37,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  void initState(){
+  void initState() {
     super.initState();
     getitems();
   }
 
-  void getitems() async{
-    final provider = Provider.of<TodoList>(context,listen: false);
+  void getitems() async {
+    final provider = Provider.of<TodoList>(context, listen: false);
     final dbhelper = DatabaseHelper.instance;
     final theList = await dbhelper.queryall();
-    for(var item in theList){
+    for (var item in theList) {
       provider.addTodo(item);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppThemeNotifier>(
