@@ -36,6 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.add,color: Colors.white),
+            tooltip: "add a Todo",
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                child: AddTodoDialog(),
+              );
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.settings),
             tooltip: "goes to the settings page",
             onPressed: () {
@@ -65,17 +76,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            barrierDismissible: true,
-            child: AddTodoDialog(),
-          );
-        },
-        child: Icon(Icons.add, color: Colors.white),
-        backgroundColor: Colors.green,
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     showDialog(
+      //       context: context,
+      //       barrierDismissible: true,
+      //       child: AddTodoDialog(),
+      //     );
+      //   },
+      //   child: Icon(Icons.add, color: Colors.white),
+      //   backgroundColor: Colors.green,
+      // ),
     );
   }
 }
