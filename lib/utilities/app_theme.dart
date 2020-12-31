@@ -39,8 +39,8 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     appBarTheme: AppBarTheme(
-      //color: Colors.blue[900],
-      color: Colors.red,
+      color: Colors.blue[900],
+      //color: Colors.red,
       // iconTheme: IconThemeData(
       //   color: Colors.white,
       // ),
@@ -48,10 +48,10 @@ class AppTheme {
           headline1: GoogleFonts.openSans(
               color: Colors.white, fontSize: 23, fontWeight: FontWeight.w600)),
     ),
-    cardColor: Colors.white,
+    cardColor: Colors.black,
     splashColor: Colors.grey,
     //primaryColor: Colors.blue[900],
-    primaryColor: Colors.red,
+    primaryColor: Colors.blue,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
     accentColor: Colors.white,

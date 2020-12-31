@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     getitems();
-     AppThemeNotifier().loadFromPrefs();
   }
 
   void getitems() async {
