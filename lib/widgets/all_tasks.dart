@@ -68,9 +68,11 @@ class _AllTasksState extends State<AllTasks> {
                   },
                   title: Text(
                     snapshot.title,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   subtitle: Text(
                     snapshot.description,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                   leading: snapshot.completed == 1
                       ? Container(

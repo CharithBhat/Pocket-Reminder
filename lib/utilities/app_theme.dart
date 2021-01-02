@@ -24,7 +24,7 @@ class AppTheme {
     ),
     cardColor: Colors.white,
     textTheme: TextTheme(
-      headline1: GoogleFonts.openSans(color: Colors.white, fontSize: 30),
+      headline1: GoogleFonts.openSans(color: Colors.black, fontSize: 30),
       headline2: GoogleFonts.openSans(
           color: Colors.white,
           fontSize: 20), // used for "Sign in with google" on the login page
@@ -33,7 +33,7 @@ class AppTheme {
           color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
       bodyText2: GoogleFonts.openSans(color: Colors.black, fontSize: 20),
       headline3: GoogleFonts.openSans(
-          color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          color: Colors.grey, fontSize: 16, fontWeight: FontWeight.bold),
     ),
   );
 
