@@ -34,6 +34,8 @@ dependencies:
   sqflite:
   path:
   shared_preferences:
+  flutter_local_notifications:
+  workmanager:
 
 dev_dependencies:
   flutter_test:
