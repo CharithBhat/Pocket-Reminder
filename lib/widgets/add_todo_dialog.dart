@@ -15,9 +15,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   String title = '';
   String description = '';
   FlutterLocalNotificationsPlugin fltrNotification;
-  String _selectedParam;
-  String task;
-  int val;
+  DateTime pickedDate;
+  TimeOfDay time;
 
   @override
   void initState() {
@@ -29,11 +28,14 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     fltrNotification = new FlutterLocalNotificationsPlugin();
     fltrNotification.initialize(initilizationsSettings,
         onSelectNotification: notificationSelected);
+
+    pickedDate = DateTime.now();
+    time = TimeOfDay.now();
   }
 
   Future _showNotification() async {
     var androidDetails = new AndroidNotificationDetails(
-        "Channel ID", "Desi programmer", "This is my channel",
+        "bruhhhhh", "Desi programmer", "This is my channel",
         importance: Importance.max);
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
@@ -42,16 +44,14 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     // await fltrNotification.show(
     //     0, "Task", "You created a Task", generalNotificationDetails, payload: "Task");
     var scheduledTime;
-    if (_selectedParam == "Hour") {
-      scheduledTime = DateTime.now().add(Duration(hours: val));
-    } else if (_selectedParam == "Minute") {
-      scheduledTime = DateTime.now().add(Duration(minutes: val));
-    } else {
-      scheduledTime = DateTime.now().add(Duration(seconds: val));
-    }
+    print(pickedDate);
+    print(time);
+    scheduledTime = pickedDate
+        .add(Duration(hours: time.hour, minutes: time.minute)); // do stuff
+    
 
     fltrNotification.schedule(
-        1, "Times Uppp", task, scheduledTime, generalNotificationDetails);
+        1, "Times Uppp", "task", scheduledTime, generalNotificationDetails);
   }
 
   Future notificationSelected(String payload) async {
@@ -66,15 +66,15 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   @override
   Widget build(BuildContext context) {
     //var height = MediaQuery.of(context).size.height;
-    //var width = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
     return AlertDialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 0),
+      //insetPadding: EdgeInsets.symmetric(horizontal: 0)
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       content: Container(
         //height: height,
-        //width: width,
+        width: width,
         child: Form(
           key: _formkey,
           child: Column(
@@ -95,91 +95,43 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                 },
                 onSavedTodo: addTodo,
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: TextField(
-                  decoration: InputDecoration(border: OutlineInputBorder()),
-                  onChanged: (_val) {
-                    task = _val;
-                  },
-                ),
+              ListTile(
+                title: Text(
+                    "Date: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                trailing: Icon(Icons.keyboard_arrow_down),
+                onTap: _pickDate,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  DropdownButton(
-                    value: _selectedParam,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("Seconds"),
-                        value: "Seconds",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Minutes"),
-                        value: "Minutes",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Hour"),
-                        value: "Hour",
-                      ),
-                    ],
-                    hint: Text(
-                      "Select Your Field.",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
-                      ),
-                    ),
-                    onChanged: (_val) {
-                      setState(() {
-                        _selectedParam = _val;
-                      });
-                    },
-                  ),
-                  DropdownButton(
-                    value: val,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("1"),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("2"),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("3"),
-                        value: 3,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("4"),
-                        value: 4,
-                      ),
-                    ],
-                    hint: Text(
-                      "Select Value",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 10
-                      ),
-                    ),
-                    onChanged: (_val) {
-                      setState(() {
-                        val = _val;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              RaisedButton(
-                onPressed: _showNotification,
-                child: new Text('Set Task With Notification'),
+              ListTile(
+                title: Text("Time: ${time.hour}:${time.minute}"),
+                trailing: Icon(Icons.keyboard_arrow_down),
+                onTap: _pickTime,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _pickDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDate: pickedDate,
+    );
+    if (date != null)
+      setState(() {
+        pickedDate = date;
+      });
+  }
+
+  _pickTime() async {
+    TimeOfDay t = await showTimePicker(context: context, initialTime: time);
+    if (t != null)
+      setState(() {
+        time = t;
+      });
   }
 
   void addTodo() {
@@ -198,6 +150,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       final provider = Provider.of<TodoList>(context, listen: false);
       provider.addTodo(todo);
       Navigator.of(context).pop();
+      _showNotification(); // remember
     }
   }
 }

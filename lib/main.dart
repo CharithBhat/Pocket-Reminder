@@ -7,16 +7,8 @@ import './screens/home_screen.dart';
 import 'package:flutter/services.dart';
 import 'database/dbhelper.dart';
 
-import 'package:workmanager/workmanager.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Workmanager.initialize(
-      callbackDispatcher, // The top level function, aka callbackDispatcher
-      isInDebugMode:
-          true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-      );
-  Workmanager.registerOneOffTask("1", "simpleTask");
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
       runApp(
@@ -34,12 +26,6 @@ void main() async {
       );
     },
   );
-}
-
-void callbackDispatcher() {
-  Workmanager.executeTask((task, inputData) {
-    return Future.value(true);
-  });
 }
 
 class MyApp extends StatefulWidget {
