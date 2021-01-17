@@ -35,23 +35,22 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
 
   Future _showNotification() async {
     var androidDetails = new AndroidNotificationDetails(
-        "bruhhhhh", "Desi programmer", "This is my channel",
+        "bruhhhhh", "Desi programmer", "This is my channel",  
         importance: Importance.max);
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails, iOS: iSODetails);
-
-    // await fltrNotification.show(
-    //     0, "Task", "You created a Task", generalNotificationDetails, payload: "Task");
     var scheduledTime;
     print(pickedDate);
     print(time);
-    scheduledTime = pickedDate
-        .add(Duration(hours: time.hour, minutes: time.minute)); // do stuff
-    
-
-    fltrNotification.schedule(
-        1, "Times Uppp", "task", scheduledTime, generalNotificationDetails);
+    // scheduledTime = pickedDate
+    //     .add(Duration(hours: time.hour, minutes: time.minute));
+    scheduledTime = DateTime.now().add(Duration(seconds: 5));
+    // fltrNotification.schedule(
+    //     0, "Times Uppp", "task", scheduledTime, generalNotificationDetails,
+    //     androidAllowWhileIdle: true);
+    await fltrNotification.show(
+        0, "Task", "You created a Task", generalNotificationDetails, payload: "Task");
   }
 
   Future notificationSelected(String payload) async {
@@ -67,46 +66,48 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   Widget build(BuildContext context) {
     //var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return AlertDialog(
-      //insetPadding: EdgeInsets.symmetric(horizontal: 0)
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      content: Container(
-        //height: height,
-        width: width,
-        child: Form(
-          key: _formkey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Add todo'),
-              SizedBox(height: 8),
-              TodoFormWidget(
-                onChangedTitle: (title) {
-                  setState(() {
-                    this.title = title;
-                  });
-                },
-                onChangedDescription: (description) {
-                  setState(() {
-                    this.description = description;
-                  });
-                },
-                onSavedTodo: addTodo,
-              ),
-              ListTile(
-                title: Text(
-                    "Date: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                trailing: Icon(Icons.keyboard_arrow_down),
-                onTap: _pickDate,
-              ),
-              ListTile(
-                title: Text("Time: ${time.hour}:${time.minute}"),
-                trailing: Icon(Icons.keyboard_arrow_down),
-                onTap: _pickTime,
-              ),
-            ],
+    return SingleChildScrollView(
+      child: AlertDialog(
+        //insetPadding: EdgeInsets.symmetric(horizontal: 0)
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        content: Container(
+          //height: height,
+          width: width,
+          child: Form(
+            key: _formkey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Add todo'),
+                SizedBox(height: 8),
+                TodoFormWidget(
+                  onChangedTitle: (title) {
+                    setState(() {
+                      this.title = title;
+                    });
+                  },
+                  onChangedDescription: (description) {
+                    setState(() {
+                      this.description = description;
+                    });
+                  },
+                  onSavedTodo: addTodo,
+                ),
+                ListTile(
+                  title: Text(
+                      "Date: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                  trailing: Icon(Icons.keyboard_arrow_down),
+                  onTap: _pickDate,
+                ),
+                ListTile(
+                  title: Text("Time: ${time.hour}:${time.minute}"),
+                  trailing: Icon(Icons.keyboard_arrow_down),
+                  onTap: _pickTime,
+                ),
+              ],
+            ),
           ),
         ),
       ),
