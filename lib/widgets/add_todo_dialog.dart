@@ -22,7 +22,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   void initState() {
     super.initState();
     //var androidInitilize = new AndroidInitializationSettings('app_icon');
-    var androidInitilize = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var androidInitilize =
+        new AndroidInitializationSettings('mipmap/ic_launcher');
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
@@ -35,16 +36,17 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
 
   Future<void> _showNotification() async {
     var androidDetails = new AndroidNotificationDetails(
-        "bruhhhhh", "Desi programmer", "This is my channel",  
-        importance: Importance.max,priority: Priority.high);
+        "bruhhhhh", "Desi programmer", "This is my channel",
+        importance: Importance.max, priority: Priority.high);
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails, iOS: iSODetails);
     var scheduledTime;
     print(pickedDate);
     print(time);
-    scheduledTime = pickedDate
-        .add(Duration(hours: time.hour, minutes: time.minute));
+    scheduledTime = DateTime.now().add(Duration(
+        hours: time.hour - DateTime.now().hour,
+        minutes: time.minute - DateTime.now().minute));
     // scheduledTime = DateTime.now().add(Duration(seconds: 5));
     fltrNotification.schedule(
         0, "Times Uppp", "task", scheduledTime, generalNotificationDetails,
