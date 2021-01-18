@@ -112,12 +112,14 @@ class _AllTasksState extends State<AllTasks> {
     );
   }
 
-  void deleteTodo(BuildContext context, Todo todo) {
+  void deleteTodo(BuildContext context, Todo todo) async {
     final dbhelper = DatabaseHelper.instance; // new
-    //final provider = Provider.of<TodoList>(context, listen: false);
     dbhelper.deleteTodo(todo.id); // new
-    //provider.removeTodo(todo);
+    // String polishedId = todo.id.substring(todo.id.length - 4);
+    // int specialId = int.parse(polishedId);
     final snackBar = SnackBar(content: Text('Deleted'));
+    // var fltrNotification = new FlutterLocalNotificationsPlugin();
+    // await fltrNotification.cancel(0);
     Scaffold.of(context).showSnackBar(snackBar);
   }
 }
