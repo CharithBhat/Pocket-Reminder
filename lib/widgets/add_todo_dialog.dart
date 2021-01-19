@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/models/todo.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/widgets/todo_form_widget.dart';
+import '../provider/notificationProvider.dart';
 
 class AddTodoDialog extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   final _formkey = GlobalKey<FormState>();
   String title = '';
   String description = '';
-  FlutterLocalNotificationsPlugin fltrNotification;
+  //FlutterLocalNotificationsPlugin fltrNotification;
   DateTime pickedDate;
   TimeOfDay time;
 
@@ -27,7 +28,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
-    fltrNotification = new FlutterLocalNotificationsPlugin();
+    var fltrNotification = Notificationher().notific; // here
+    //fltrNotification = new FlutterLocalNotificationsPlugin();
     fltrNotification.initialize(initilizationsSettings,
         onSelectNotification: notificationSelected);
     pickedDate = DateTime.now();
@@ -47,10 +49,29 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     // int specialId = int.parse(polishedId);
     print(pickedDate);
     print(time);
-    scheduledTime = DateTime.now().add(Duration(
+    // var datee =
+    //     pickedDate.add(Duration(hours: time.hour, minutes: time.minute));
+    // var actual = (datee.difference(DateTime.now())).inMinutes;
+    // scheduledTime = DateTime.now().add(Duration(minutes: actual));
+
+    if (pickedDate.day == DateTime.now().day) {
+      scheduledTime = pickedDate.add(Duration(
         hours: time.hour - DateTime.now().hour,
-        minutes: time.minute - DateTime.now().minute));
+        minutes: time.minute - DateTime.now().minute,
+      ));
+    } else {
+      scheduledTime =
+          pickedDate.add(Duration(hours: time.hour, minutes: time.minute));
+    }
+
+    print(scheduledTime);
+
+    // scheduledTime = DateTime.now().add(Duration(
+    //     hours: time.hour - DateTime.now().hour,
+    //     minutes: time.minute - DateTime.now().minute));
+
     // scheduledTime = DateTime.now().add(Duration(seconds: 5));
+    var fltrNotification = Notificationher().notific; // herre
     fltrNotification.schedule(
         0, title, description, scheduledTime, generalNotificationDetails,
         androidAllowWhileIdle: true);
@@ -70,7 +91,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     //var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: AlertDialog(
+          child: AlertDialog(
         //insetPadding: EdgeInsets.symmetric(horizontal: 0)
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),

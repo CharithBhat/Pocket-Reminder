@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/provider/notificationProvider.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
@@ -118,8 +119,10 @@ class _AllTasksState extends State<AllTasks> {
     // String polishedId = todo.id.substring(todo.id.length - 4);
     // int specialId = int.parse(polishedId);
     final snackBar = SnackBar(content: Text('Deleted'));
-    // var fltrNotification = new FlutterLocalNotificationsPlugin();
-    // await fltrNotification.cancel(0);
+    //var fltrNotification = new FlutterLocalNotificationsPlugin();
+    //await fltrNotification.cancel(0);
+    var fltrNotification = Notificationher().notific;
+    await fltrNotification.cancel(0);
     Scaffold.of(context).showSnackBar(snackBar);
   }
 }
