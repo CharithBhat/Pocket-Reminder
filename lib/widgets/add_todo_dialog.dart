@@ -54,11 +54,18 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     // var actual = (datee.difference(DateTime.now())).inMinutes;
     // scheduledTime = DateTime.now().add(Duration(minutes: actual));
 
+    // if (pickedDate.day == DateTime.now().day) {
+    //   scheduledTime = pickedDate.add(Duration(
+    //     hours: time.hour - DateTime.now().hour,
+    //     minutes: time.minute - DateTime.now().minute - 1,
+    //     seconds: 60 - DateTime.now().second,
+    //   ));
+
     if (pickedDate.day == DateTime.now().day) {
-      scheduledTime = pickedDate.add(Duration(
+      scheduledTime = DateTime.now().add(Duration(
         hours: time.hour - DateTime.now().hour,
         minutes: time.minute - DateTime.now().minute - 1,
-        seconds: DateTime.now().second,
+        seconds: 60 - DateTime.now().second,
       ));
     } else {
       scheduledTime =
