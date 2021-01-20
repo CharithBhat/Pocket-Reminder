@@ -57,7 +57,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     if (pickedDate.day == DateTime.now().day) {
       scheduledTime = pickedDate.add(Duration(
         hours: time.hour - DateTime.now().hour,
-        minutes: time.minute - DateTime.now().minute,
+        minutes: time.minute - DateTime.now().minute - 1,
+        seconds: DateTime.now().second,
       ));
     } else {
       scheduledTime =
@@ -91,7 +92,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     //var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-          child: AlertDialog(
+      child: AlertDialog(
         //insetPadding: EdgeInsets.symmetric(horizontal: 0)
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
