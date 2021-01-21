@@ -71,7 +71,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       scheduledTime =
           pickedDate.add(Duration(hours: time.hour, minutes: time.minute));
     }
-
+    print(pickedDate);
+    print(DateTime.now());
     print(scheduledTime);
 
     // scheduledTime = DateTime.now().add(Duration(
