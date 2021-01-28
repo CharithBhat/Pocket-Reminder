@@ -14,11 +14,11 @@ class _CompletedTasksState extends State<CompletedTasks> {
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0, left: 16),
-        child: Consumer<TodoList>(
+        child: Consumer<ReminderTodoList>(
           builder: (context, provider, child) {
-            if (provider.todoList != null) {
+            if (provider.reminderTodoList != null) {
               return ListView.builder(
-                itemCount: provider.todoList
+                itemCount: provider.reminderTodoList
                         .where((element) => element.completed == 1).toList()
                         .length,
                     
@@ -26,7 +26,7 @@ class _CompletedTasksState extends State<CompletedTasks> {
                   // return provider.todoList[index].completed == 1
                   //     ? singleItem(index, provider.todoList[index])
                   //     : Container();
-                  return singleItem(index, provider.todoList.where((element) => element.completed == 1).toList()[index]);
+                  return singleItem(index, provider.reminderTodoList.where((element) => element.completed == 1).toList()[index]);
                 },
               );
             }

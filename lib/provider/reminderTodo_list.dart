@@ -6,7 +6,7 @@ class ReminderTodoList with ChangeNotifier {
   List<ReminderTodo> _todoList = [];
   final dbhelper = DatabaseHelper.instance;
 
-  List<ReminderTodo> get todoList{
+  List<ReminderTodo> get reminderTodoList{
     return _todoList;
   }
 

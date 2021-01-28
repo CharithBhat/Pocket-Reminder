@@ -21,9 +21,9 @@ class _AllTasksState extends State<AllTasks> {
       child: Consumer<ReminderTodoList>(
         builder: (context, provider, child) {
           return ListView.builder(
-            itemCount: provider.todoList.length,
+            itemCount: provider.reminderTodoList.length,
             itemBuilder: (BuildContext context, int index) {
-              return singleItem(index, provider.todoList[index], context);
+              return singleItem(index, provider.reminderTodoList[index], context);
             },
           );
         },

@@ -1,9 +1,10 @@
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_application/models/birthdayTodo.dart';
+import 'package:todo_application/models/quickTodo.dart';
 import 'dart:io';
-
-import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/models/reminderTodo.dart';
 
 class DatabaseHelper {
   // database name
@@ -11,7 +12,9 @@ class DatabaseHelper {
   static final _databaseversion = 1;
 
   // the table name
-  static final table = "my_table";
+  static final tableReminderTodo = "my_Reminder_table";
+  static final tableQuickTodo = "my_Quick_table";
+  static final tableBirthdayTodo = "my_birthday_table";
 
   // a database
   static Database _database;
@@ -21,7 +24,7 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // asking for a database
-  Future<Database> get databse async {
+  Future<Database> get database async {
     if (_database != null) return _database;
 
     // create a database if one doesn't exist
@@ -39,9 +42,8 @@ class DatabaseHelper {
 
   // create a database since it doesn't exist
   Future _onCreate(Database db, int version) async {
-    // sql code
     await db.execute('''
-      CREATE TABLE $table (
+      CREATE TABLE $tableReminderTodo (
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         description TEXT NOT NULL,
@@ -49,28 +51,62 @@ class DatabaseHelper {
         date TEXT NOT NULL
       )
       ''');
+    await db.execute('''
+        CREATE TABLE $tableQuickTodo(
+        id TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        date TEXT NOT NULL
+      )
+    ''');
+    await db.execute('''
+        CREATE TABLE $tableBirthdayTodo(
+          id TEXT PRIMARY KEY,
+          name TEXT NOT NULL,
+          date TEXT NOT NULL
+        )
+    ''');
   }
 
-  // functions to insert data
-  Future<void> insertTodo(Todo todo) async {
-    Database db = await instance.databse;
+  // functions to insert Reminder todo
+  Future<void> insertReminderTodo(ReminderTodo reminderTodo) async {
+    Database db = await instance.database;
     return await db.insert(
-      table,
-      todo.toMap(),
+      tableReminderTodo,
+      reminderTodo.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  // function to query all the rows
-  Future<List<Todo>> queryall() async {
-    Database db = await instance.databse;
-    final List<Map<String, dynamic>> maps = await db.query(table);
+  //function to insert quick todo
+  Future<void> insertQuickTodo(QuickTodo quickTodo) async {
+    Database db = await instance.database;
+    return await db.insert(
+      tableQuickTodo,
+      quickTodo.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  //
+  Future<void> insertBirthdayTodo(BirthdayTodo birthdayTodo) async {
+    Database db = await instance.database;
+    return await db.insert(
+      tableBirthdayTodo,
+      birthdayTodo.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // function to query all ReminderTodo's
+  Future<List<ReminderTodo>> queryallReminderTodo() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableReminderTodo);
     print(maps);
     print('thats all');
     return List.generate(
       maps.length,
       (index) {
-        return Todo(
+        return ReminderTodo(
           id: maps[index]['id'],
           title: maps[index]['title'],
           description: maps[index]['description'],
@@ -81,30 +117,102 @@ class DatabaseHelper {
     );
   }
 
-  // function to delete some data
-  Future<void> deleteTodo(String id) async {
-    Database db = await instance.databse;
-    await db.delete(table, where: "id = ?", whereArgs: [id]);
-  }
-
-  Future<void> updateTodo(Todo todo) async {
-    final db = await instance.databse;
-    await db.update(
-      table,
-      todo.toMap(),
-      where: "id = ?",
-      whereArgs: [todo.id],
+  //function to query all QuickTodo's
+  Future<List<QuickTodo>> queryallQuickTodo() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableQuickTodo);
+    print(maps);
+    print('thats all');
+    return List.generate(
+      maps.length,
+      (index) {
+        return QuickTodo(
+          id: maps[index]['id'],
+          name: maps[index]['name'],
+          date: maps[index]['date'],
+        );
+      },
     );
   }
 
-  Future<void> toggleTodo(Todo todo) async {
-    final db = await instance.databse;
-    todo.completed == 1 ? todo.completed = 0 : todo.completed = 1;
+  //
+  Future<List<BirthdayTodo>> queryallBirthdayTodo() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableBirthdayTodo);
+    print(maps);
+    print('thats all');
+    return List.generate(
+      maps.length,
+      (index) {
+        return BirthdayTodo(
+          id: maps[index]['id'],
+          name: maps[index]['name'],
+          date: maps[index]['date'],
+        );
+      },
+    );
+  }
+
+  // delete reminder from database
+  Future<void> deleteReminderTodo(String id) async {
+    Database db = await instance.database;
+    await db.delete(tableReminderTodo, where: "id = ?", whereArgs: [id]);
+  }
+
+  //delete quickTodo from database
+  Future<void> deleteQuickTodo(String id) async {
+    Database db = await instance.database;
+    await db.delete(tableQuickTodo, where: "id = ?", whereArgs: [id]);
+  }
+
+  //delete birthdayTodo from database
+  Future<void> deleteBirthdayTodo(String id) async {
+    Database db = await instance.database;
+    await db.delete(tableBirthdayTodo, where: "id = ?", whereArgs: [id]);
+  }
+
+  //update Reminder todo
+  Future<void> updateReminderTodo(ReminderTodo reminderTodo) async {
+    final db = await instance.database;
     await db.update(
-      table,
-      todo.toMap(),
+      tableReminderTodo,
+      reminderTodo.toMap(),
       where: "id = ?",
-      whereArgs: [todo.id],
+      whereArgs: [reminderTodo.id],
+    );
+  }
+
+  //update quick Todo
+  Future<void> updateQuickTodo(QuickTodo quickTodo) async {
+    final db = await instance.database;
+    await db.update(
+      tableQuickTodo,
+      quickTodo.toMap(),
+      where: "id = ?",
+      whereArgs: [quickTodo.id],
+    );
+  }
+
+  //update birthday todo
+  Future<void> updateBirthdayTodo(BirthdayTodo birthdayTodo) async {
+    final db = await instance.database;
+    await db.update(
+      tableQuickTodo,
+      birthdayTodo.toMap(),
+      where: "id = ?",
+      whereArgs: [birthdayTodo.id],
+    );
+  }
+
+  //toggle reminder todo
+  Future<void> toggleTodo(ReminderTodo reminderTodo) async {
+    final db = await instance.database;
+    reminderTodo.completed == 1 ? reminderTodo.completed = 0 : reminderTodo.completed = 1;
+    await db.update(
+      tableReminderTodo,
+      reminderTodo.toMap(),
+      where: "id = ?",
+      whereArgs: [reminderTodo.id],
     );
   }
 }

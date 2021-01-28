@@ -17,8 +17,8 @@ void main() async {
             ChangeNotifierProvider<AppThemeNotifier>(
               create: (context) => AppThemeNotifier(),
             ),
-            ChangeNotifierProvider<TodoList>(
-              create: (context) => TodoList(),
+            ChangeNotifierProvider<ReminderTodoList>(
+              create: (context) => ReminderTodoList(),
             ),
           ],
           child: MyApp(),
@@ -40,11 +40,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getitems() async {
-    final provider = Provider.of<TodoList>(context, listen: false);
+    final provider = Provider.of<ReminderTodoList>(context, listen: false);
     final dbhelper = DatabaseHelper.instance;
-    final theList = await dbhelper.queryall();
+    final theList = await dbhelper.queryallReminderTodo();
     for (var item in theList) {
-      provider.addTodo(item);
+      provider.addReminderTodo(item);
     }
   }
 
