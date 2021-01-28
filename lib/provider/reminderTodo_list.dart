@@ -2,43 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 
-class TodoList with ChangeNotifier {
-  List<Todo> _todoList = [];
+class ReminderTodoList with ChangeNotifier {
+  List<ReminderTodo> _todoList = [];
   final dbhelper = DatabaseHelper.instance;
 
-  List<Todo> get todoList{
+  List<ReminderTodo> get todoList{
     return _todoList;
   }
 
-  void toggleCompletion(Todo todo) {
-    if (todo.completed == 1) {
-      todo.completed = todo.completed - 1;
-      dbhelper.updateTodo(todo);
+  void toggleCompletion(ReminderTodo reminderTodo) {
+    if (reminderTodo.completed == 1) {
+      reminderTodo.completed = reminderTodo.completed - 1;
+      dbhelper.updateReminderTodo(reminderTodo);
     } else {
-      todo.completed = todo.completed + 1;
-      dbhelper.updateTodo(todo);
+      reminderTodo.completed = reminderTodo.completed + 1;
+      dbhelper.updateReminderTodo(reminderTodo);
     }
     notifyListeners();
   }
 
-  void removeTodo(Todo todo) {
-    dbhelper.deleteTodo(todo.id);
-    _todoList.remove(todo);
+  void removeReminderTodo(ReminderTodo reminderTodo) {
+    dbhelper.deleteReminderTodo(reminderTodo.id);
+    _todoList.remove(reminderTodo);
     notifyListeners();
   }
 
-  void updateTodo(Todo todo, String title, String description) {
-    todo.title = title;
-    todo.description = description;
+  void updateReminderTodo(ReminderTodo reminderTodo, String title, String description) {
+    reminderTodo.title = title;
+    reminderTodo.description = description;
     // todo.title = title;
     // todo.description = description;
-    dbhelper.updateTodo(todo);
+    dbhelper.updateReminderTodo(reminderTodo);
     notifyListeners();
   }
 
-  void addTodo(Todo todo) {
-    _todoList.add(todo);
-    dbhelper.insertTodo(todo);
+  void addReminderTodo(ReminderTodo reminderTodo) {
+    _todoList.add(reminderTodo);
+    dbhelper.insertReminderTodo(reminderTodo);
     notifyListeners();
   }
 }

@@ -5,8 +5,8 @@ import 'package:todo_application/widgets/todo_form_widget.dart';
 import '../provider/reminderTodo_list.dart';
 
 class EditScreen extends StatefulWidget {
-  final Todo todo;
-  EditScreen({@required this.todo});
+  final ReminderTodo reminderTodo;
+  EditScreen({@required this.reminderTodo});
 
   @override
   _EditScreenState createState() => _EditScreenState();
@@ -20,8 +20,8 @@ class _EditScreenState extends State<EditScreen> {
   @override
   void initState() {
     super.initState();
-    title = widget.todo.title;
-    description = widget.todo.description;
+    title = widget.reminderTodo.title;
+    description = widget.reminderTodo.description;
   }
 
   @override
@@ -33,8 +33,8 @@ class _EditScreenState extends State<EditScreen> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              final provider = Provider.of<TodoList>(context, listen: false);
-              provider.removeTodo(widget.todo);
+              final provider = Provider.of<ReminderTodoList>(context, listen: false);
+              provider.removeReminderTodo(widget.reminderTodo);
               // setState(() {
               //   dbhelper.deleteTodo(widget.todo.id);
               // });
@@ -71,7 +71,7 @@ class _EditScreenState extends State<EditScreen> {
                       this.description = description;
                     });
                   },
-                  onSavedTodo: () => editTodo(context),
+                  onSavedTodo: () => editReminderTodo(context),
                 ),
               ],
             ),
@@ -81,13 +81,13 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  void editTodo(BuildContext context) {
+  void editReminderTodo(BuildContext context) {
     final isValid = _formkey.currentState.validate();
     if (!isValid) {
       return;
     } else {
-      final provider = Provider.of<TodoList>(context, listen: false);
-      provider.updateTodo(widget.todo, title, description);
+      final provider = Provider.of<ReminderTodoList>(context, listen: false);
+      provider.updateReminderTodo(widget.reminderTodo, title, description);
       // final dbhelper = DatabaseHelper.instance;
       // setState(() {
       //   dbhelper.updateTodo(widget.todo);

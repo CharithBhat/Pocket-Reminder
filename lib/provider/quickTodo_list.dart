@@ -12,7 +12,7 @@ class QuickTodoList with ChangeNotifier{
   }
 
   void removeQuickTodo(QuickTodo quickTodo){
-    dbhelper.deleteTodo(id)
+    dbhelper.deleteQuickTodo(quickTodo.id);
     _quickTodoList.remove(quickTodo);
     notifyListeners();
   }

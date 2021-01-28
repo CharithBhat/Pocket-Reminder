@@ -174,15 +174,15 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     if (!isValid) {
       return;
     } else {
-      final todo = Todo(
+      final todo = ReminderTodo(
         id: DateTime.now().toIso8601String(),
         title: title,
         description: description,
         date: DateTime.now().toIso8601String(),
         completed: 0,
       );
-      final provider = Provider.of<TodoList>(context, listen: false);
-      provider.addTodo(todo);
+      final provider = Provider.of<ReminderTodoList>(context, listen: false);
+      provider.addReminderTodo(todo);
       Navigator.of(context).pop();
       _showNotification(todo.title, todo.description, todo.id);
     }

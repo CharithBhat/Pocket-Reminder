@@ -18,7 +18,7 @@ class _AllTasksState extends State<AllTasks> {
     return Container(
       // child: Padding(
       //   padding: const EdgeInsets.only(top: 16.0, left: 16),
-      child: Consumer<TodoList>(
+      child: Consumer<ReminderTodoList>(
         builder: (context, provider, child) {
           return ListView.builder(
             itemCount: provider.todoList.length,
@@ -32,7 +32,7 @@ class _AllTasksState extends State<AllTasks> {
   }
 
   Widget singleItem(int index, snapshot, BuildContext context) {
-    final provider = Provider.of<TodoList>(context, listen: false);
+    final provider = Provider.of<ReminderTodoList>(context, listen: false);
     return ClipRect(
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
@@ -40,7 +40,7 @@ class _AllTasksState extends State<AllTasks> {
         actions: [
           IconSlideAction(
             color: Colors.green,
-            onTap: () => editTodo(context, snapshot),
+            onTap: () => editReminderTodo(context, snapshot),
             caption: 'Edit',
             icon: Icons.edit,
           )
@@ -50,7 +50,7 @@ class _AllTasksState extends State<AllTasks> {
             color: Colors.red,
             caption: 'Delete',
             onTap: () {
-              provider.removeTodo(snapshot);
+              provider.removeReminderTodo(snapshot);
               final snackBar = SnackBar(content: Text('Deleted'));
               Scaffold.of(context).showSnackBar(snackBar);
             },
@@ -105,17 +105,17 @@ class _AllTasksState extends State<AllTasks> {
     );
   }
 
-  void editTodo(BuildContext context, Todo todo) {
+  void editReminderTodo(BuildContext context, ReminderTodo reminderTodo) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EditScreen(todo: todo),
+        builder: (context) => EditScreen(reminderTodo: reminderTodo),
       ),
     );
   }
 
-  void deleteTodo(BuildContext context, Todo todo) async {
-    final dbhelper = DatabaseHelper.instance; // new
-    dbhelper.deleteTodo(todo.id); // new
+  void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
+    final dbhelper = DatabaseHelper.instance; 
+    dbhelper.deleteReminderTodo(reminderTodo.id); // new
     // String polishedId = todo.id.substring(todo.id.length - 4);
     // int specialId = int.parse(polishedId);
     final snackBar = SnackBar(content: Text('Deleted'));
