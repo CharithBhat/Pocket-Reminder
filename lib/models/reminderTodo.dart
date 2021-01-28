@@ -1,11 +1,11 @@
-class Todo {
+class ReminderTodo {
   String id;
   String title;
   String description;
   int completed;
   String date;
 
-  Todo({
+  ReminderTodo({
     this.id,
     this.title,
     this.description,

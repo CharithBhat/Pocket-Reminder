@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/database/dbhelper.dart';
-import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/notificationProvider.dart';
 import 'package:todo_application/provider/todo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';

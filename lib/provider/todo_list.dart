@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/database/dbhelper.dart';
-import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/models/reminderTodo.dart';
 
 class TodoList with ChangeNotifier {
   List<Todo> _todoList = [];
@@ -30,8 +30,8 @@ class TodoList with ChangeNotifier {
   void updateTodo(Todo todo, String title, String description) {
     todo.title = title;
     todo.description = description;
-    todo.title = title;
-    todo.description = description;
+    // todo.title = title;
+    // todo.description = description;
     dbhelper.updateTodo(todo);
     notifyListeners();
   }
