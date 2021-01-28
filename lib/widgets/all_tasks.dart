@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/notificationProvider.dart';
-import 'package:todo_application/provider/todo_list.dart';
+import 'package:todo_application/provider/reminderTodo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
 class AllTasks extends StatefulWidget {

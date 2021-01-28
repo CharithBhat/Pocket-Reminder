@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/widgets/todo_form_widget.dart';
-import '../provider/todo_list.dart';
+import '../provider/reminderTodo_list.dart';
 
 class EditScreen extends StatefulWidget {
   final Todo todo;

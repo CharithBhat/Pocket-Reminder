@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_application/provider/todo_list.dart';
+import 'package:todo_application/provider/reminderTodo_list.dart';
 
 class CompletedTasks extends StatefulWidget {
   @override
