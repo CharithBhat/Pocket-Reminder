@@ -51,10 +51,15 @@ class _MyAppState extends State<MyApp> {
 
   void getitems() async {
     final provider = Provider.of<ReminderTodoList>(context, listen: false);
+    final quickProvider = Provider.of<QuickTodoList>(context, listen: false);
     final dbhelper = DatabaseHelper.instance;
     final theList = await dbhelper.queryallReminderTodo();
+    final quickTodoList = await dbhelper.queryallQuickTodo();
     for (var item in theList) {
       provider.addReminderTodo(item);
+    }
+    for(var item in quickTodoList){
+      quickProvider.addQuickTodo(item);
     }
   }
 
