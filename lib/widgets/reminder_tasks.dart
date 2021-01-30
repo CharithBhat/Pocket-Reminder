@@ -112,7 +112,7 @@ class _ReminderTasksState extends State<ReminderTasks> {
     );
   }
 
-  // YO DONT FORGET THIS SHIT!!!!!!!!!!!!!!
+  // YO DONT FORGET THIS SHIT!!!!!!!!!!!!!!   Never called it thats why it wasn't deleting i guess...
 
   // void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
   //   final dbhelper = DatabaseHelper.instance;

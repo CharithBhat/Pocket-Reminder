@@ -65,11 +65,11 @@ class _QuickTasksState extends State<QuickTasks> {
                     provider.toggleCompletion(snapshot);
                   },
                   title: Text(
-                    snapshot.title,
+                    snapshot.name,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   subtitle: Text(
-                    snapshot.description,
+                    snapshot.date,
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   leading: snapshot.completed == 1

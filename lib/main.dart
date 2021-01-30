@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/provider/app_theme_notifier.dart';
+import 'package:todo_application/provider/quickTodo_list.dart';
 import 'package:todo_application/provider/reminderTodo_list.dart';
 import 'package:todo_application/utilities/app_theme.dart';
 import './screens/home_screen.dart';
@@ -20,6 +21,15 @@ void main() async {
             ChangeNotifierProvider<ReminderTodoList>(
               create: (context) => ReminderTodoList(),
             ),
+            ChangeNotifierProvider<QuickTodoList>(
+              create: (context) => QuickTodoList(),
+            ),
+
+            // NEED  to add a birthday provider
+
+            // ChangeNotifierProvider<BirthdayTodoList>(
+            //   create: (context) => ReminderTodoList(),
+            // ),
           ],
           child: MyApp(),
         ),

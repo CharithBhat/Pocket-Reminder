@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/models/quickTodo.dart';
+import 'package:todo_application/provider/quickTodo_list.dart';
 import 'package:todo_application/screens/settings_screen.dart';
 import 'package:todo_application/widgets/add_todo_dialog.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/widgets/quick_tasks.dart';
 
 class QuickTodoScreen extends StatefulWidget {
   @override
@@ -50,7 +52,7 @@ class _QuickTodoScreenState extends State<QuickTodoScreen> {
       ),
       body: Column(
         children: [
-          Expanded(child: Container()), // change this with the query all thing
+          Expanded(child: QuickTasks()),
           EnterMessage(),
         ],
       ),
@@ -64,20 +66,21 @@ class EnterMessage extends StatefulWidget {
 }
 
 class _EnterMessageState extends State<EnterMessage> {
-
   final _controler = TextEditingController();
-    var _enteredMessage = '';
+  var _enteredMessage = '';
 
-  void _sendMessage(){
+  void _sendMessage() {
     FocusScope.of(context).unfocus();
-    final provider = Provider.of(context, listen: false)._quickTodoList();
+    final provider = Provider.of<QuickTodoList>(context, listen: false);
     provider.addQuickTodo(
       QuickTodo(
         name: _enteredMessage,
         id: DateTime.now().toIso8601String(),
         date: DateTime.now().toIso8601String(),
+        completed: 0,
       ),
     );
+    _controler.clear();
   }
 
   @override
@@ -129,31 +132,29 @@ class _EnterMessageState extends State<EnterMessage> {
             ),
           ),
           SizedBox(width: 15),
-          // Container(
-          //   padding: const EdgeInsets.all(15.0),
-          //   decoration:
-          //       BoxDecoration(color: Colors.green, shape: BoxShape.circle),
-          //   child: InkWell(
-          //     child: Icon(
-          //       Icons.send,
-          //       color: Colors.white,
-          //     ),
-          //     // onLongPress: () {
-          //     //   setState(() {
-          //     //     _showBottom = true;
-          //     //   });
-          //     // },
+          Container(
+            padding: const EdgeInsets.all(15.0),
+            decoration:
+                BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+            child: InkWell(
+              child: Icon(
+                Icons.send,
+                color: Colors.white,
+              ),
+              onTap: _enteredMessage.trim().isEmpty ? null : _sendMessage,
+            ),
+          )
+
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.send,
           //   ),
-          // )
-          IconButton(
-            icon: Icon(Icons.send),
-            onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-            color: Theme.of(context).primaryColor,
-          ),
+          //   onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
+          //   color: Theme.of(context).primaryColor,
+          // ),
         ],
       ),
     );
   }
 }
-
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/models/quickTodo.dart';
 import 'package:todo_application/provider/quickTodo_list.dart';
-import 'package:todo_application/widgets/quick_todo_from.dart';
+import 'package:todo_application/widgets/quick_todo_form.dart';
 
 class EditQuickTodoScreen extends StatefulWidget {
   final QuickTodo quickTodo;

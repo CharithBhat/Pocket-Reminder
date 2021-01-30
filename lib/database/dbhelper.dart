@@ -54,7 +54,7 @@ class DatabaseHelper {
     await db.execute('''
         CREATE TABLE $tableQuickTodo(
         id TEXT PRIMARY KEY,
-        title TEXT NOT NULL,
+        name TEXT NOT NULL,
         completed INTEGER,
         date TEXT NOT NULL
       )
