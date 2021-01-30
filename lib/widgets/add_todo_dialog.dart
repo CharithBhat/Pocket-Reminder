@@ -14,7 +14,6 @@ class AddTodoDialog extends StatefulWidget {
 class _AddTodoDialogState extends State<AddTodoDialog> {
   final _formkey = GlobalKey<FormState>();
   String title = '';
-  String description = '';
   //FlutterLocalNotificationsPlugin fltrNotification;
   DateTime pickedDate;
   TimeOfDay time;
@@ -22,7 +21,6 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   @override
   void initState() {
     super.initState();
-    //var androidInitilize = new AndroidInitializationSettings('app_icon');
     var androidInitilize =
         new AndroidInitializationSettings('mipmap/ic_launcher');
     var iOSinitilize = new IOSInitializationSettings();
@@ -37,7 +35,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   }
 
   Future<void> _showNotification(
-      String title, String description, String id) async {
+      String title, String id) async {
     var androidDetails = new AndroidNotificationDetails(
         "bruhhhhh", "Something", "This is my channel",
         importance: Importance.max, priority: Priority.high);
@@ -82,7 +80,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     // scheduledTime = DateTime.now().add(Duration(seconds: 5));
     var fltrNotification = Notificationher().notific; // herre
     fltrNotification.schedule(
-        0, title, description, scheduledTime, generalNotificationDetails,
+        0, title,"", scheduledTime, generalNotificationDetails,
         androidAllowWhileIdle: true);
   }
 
@@ -119,11 +117,6 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                   onChangedTitle: (title) {
                     setState(() {
                       this.title = title;
-                    });
-                  },
-                  onChangedDescription: (description) {
-                    setState(() {
-                      this.description = description;
                     });
                   },
                   onSavedTodo: addTodo,
@@ -177,14 +170,13 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       final todo = ReminderTodo(
         id: DateTime.now().toIso8601String(),
         title: title,
-        description: description,
         date: DateTime.now().toIso8601String(),
         completed: 0,
       );
       final provider = Provider.of<ReminderTodoList>(context, listen: false);
       provider.addReminderTodo(todo);
       Navigator.of(context).pop();
-      _showNotification(todo.title, todo.description, todo.id);
+      _showNotification(todo.title, todo.id);
     }
   }
 }

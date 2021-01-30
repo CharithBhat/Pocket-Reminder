@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todo_application/models/quickTodo.dart';
 import 'package:todo_application/provider/quickTodo_list.dart';
 import 'package:todo_application/screens/settings_screen.dart';
-import 'package:todo_application/widgets/add_todo_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/widgets/quick_tasks.dart';
 
@@ -24,17 +23,6 @@ class _QuickTodoScreenState extends State<QuickTodoScreen> {
         backgroundColor: Theme.of(context).appBarTheme.color,
         elevation: 0,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add, color: Colors.white, size: 30),
-            tooltip: "add a Todo",
-            onPressed: () {
-              showDialog(
-                context: context,
-                barrierDismissible: true,
-                child: AddTodoDialog(),
-              );
-            },
-          ),
           IconButton(
             icon: Icon(Icons.settings),
             tooltip: "goes to the settings page",
@@ -66,7 +54,7 @@ class EnterMessage extends StatefulWidget {
 }
 
 class _EnterMessageState extends State<EnterMessage> {
-  final _controler = TextEditingController();
+  final _controller = TextEditingController();
   var _enteredMessage = '';
 
   void _sendMessage() {
@@ -80,7 +68,7 @@ class _EnterMessageState extends State<EnterMessage> {
         completed: 0,
       ),
     );
-    _controler.clear();
+    _controller.clear();
   }
 
   @override
@@ -102,10 +90,13 @@ class _EnterMessageState extends State<EnterMessage> {
               ),
               child: Row(
                 children: [
-                  IconButton(icon: Icon(Icons.face), onPressed: () {}),
+                  IconButton(
+                      icon: Icon(Icons.face),
+                      color: Colors.black,
+                      onPressed: () {}),
                   Expanded(
                     child: TextField(
-                      controller: _controler,
+                      controller: _controller,
                       textCapitalization: TextCapitalization.sentences,
                       autocorrect: true,
                       enableSuggestions: true,
@@ -120,11 +111,11 @@ class _EnterMessageState extends State<EnterMessage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.photo_camera),
+                    icon: Icon(Icons.photo_camera, color: Colors.black),
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: Icon(Icons.attach_file),
+                    icon: Icon(Icons.attach_file, color: Colors.black),
                     onPressed: () {},
                   )
                 ],
@@ -157,4 +148,3 @@ class _EnterMessageState extends State<EnterMessage> {
     );
   }
 }
-

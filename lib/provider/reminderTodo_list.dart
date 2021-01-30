@@ -27,11 +27,8 @@ class ReminderTodoList with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateReminderTodo(ReminderTodo reminderTodo, String title, String description) {
+  void updateReminderTodo(ReminderTodo reminderTodo, String title) {
     reminderTodo.title = title;
-    reminderTodo.description = description;
-    // todo.title = title;
-    // todo.description = description;
     dbhelper.updateReminderTodo(reminderTodo);
     notifyListeners();
   }

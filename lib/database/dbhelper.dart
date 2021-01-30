@@ -46,7 +46,6 @@ class DatabaseHelper {
       CREATE TABLE $tableReminderTodo (
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
-        description TEXT NOT NULL,
         completed INTEGER,
         date TEXT NOT NULL
       )
@@ -110,7 +109,6 @@ class DatabaseHelper {
         return ReminderTodo(
           id: maps[index]['id'],
           title: maps[index]['title'],
-          description: maps[index]['description'],
           completed: maps[index]['completed'],
           date: maps[index]['date'],
         );

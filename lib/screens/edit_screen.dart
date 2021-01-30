@@ -15,13 +15,11 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   final _formkey = GlobalKey<FormState>();
   String title = '';
-  String description = '';
 
   @override
   void initState() {
     super.initState();
     title = widget.reminderTodo.title;
-    description = widget.reminderTodo.description;
   }
 
   @override
@@ -33,7 +31,8 @@ class _EditScreenState extends State<EditScreen> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              final provider = Provider.of<ReminderTodoList>(context, listen: false);
+              final provider =
+                  Provider.of<ReminderTodoList>(context, listen: false);
               provider.removeReminderTodo(widget.reminderTodo);
               // setState(() {
               //   dbhelper.deleteTodo(widget.todo.id);
@@ -60,15 +59,9 @@ class _EditScreenState extends State<EditScreen> {
                 SizedBox(height: 8),
                 TodoFormWidget(
                   title: title,
-                  description: description,
                   onChangedTitle: (title) {
                     setState(() {
                       this.title = title;
-                    });
-                  },
-                  onChangedDescription: (description) {
-                    setState(() {
-                      this.description = description;
                     });
                   },
                   onSavedTodo: () => editReminderTodo(context),
@@ -87,7 +80,7 @@ class _EditScreenState extends State<EditScreen> {
       return;
     } else {
       final provider = Provider.of<ReminderTodoList>(context, listen: false);
-      provider.updateReminderTodo(widget.reminderTodo, title, description);
+      provider.updateReminderTodo(widget.reminderTodo, title);
       // final dbhelper = DatabaseHelper.instance;
       // setState(() {
       //   dbhelper.updateTodo(widget.todo);

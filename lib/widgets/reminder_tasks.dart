@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/reminderTodo_list.dart';
@@ -32,6 +33,8 @@ class _ReminderTasksState extends State<ReminderTasks> {
 
   Widget singleItem(int index, snapshot, BuildContext context) {
     final provider = Provider.of<ReminderTodoList>(context, listen: false);
+    var _theDate = DateTime.parse(snapshot.date);
+    var _onlyDate = DateFormat('dd-MMM -yyyy').format(_theDate);
     return ClipRect(
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
@@ -57,7 +60,6 @@ class _ReminderTasksState extends State<ReminderTasks> {
           )
         ],
         child: GestureDetector(
-          // onTap: () => editTodo(context, provider.todoList[index]),
           child: Column(
             children: [
               Card(
@@ -71,7 +73,7 @@ class _ReminderTasksState extends State<ReminderTasks> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   subtitle: Text(
-                    snapshot.description,
+                    _onlyDate.toString(),
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   leading: snapshot.completed == 1

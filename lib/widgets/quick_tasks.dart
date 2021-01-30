@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/models/quickTodo.dart';
 import 'package:todo_application/provider/quickTodo_list.dart';
@@ -30,6 +31,8 @@ class _QuickTasksState extends State<QuickTasks> {
 
   Widget singleItem(int index, snapshot, BuildContext context) {
     final provider = Provider.of<QuickTodoList>(context, listen: false);
+    var _theDate =  DateTime.parse(snapshot.date);
+    var _onlyDate = DateFormat('dd-MMM -yyyy').format(_theDate);
     return ClipRect(
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
@@ -69,7 +72,8 @@ class _QuickTasksState extends State<QuickTasks> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   subtitle: Text(
-                    snapshot.date,
+                    //snapshot.date,
+                    _onlyDate.toString(),
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   leading: snapshot.completed == 1
