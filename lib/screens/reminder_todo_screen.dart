@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/screens/settings_screen.dart';
 import 'package:todo_application/widgets/add_todo_dialog.dart';
-import 'package:todo_application/widgets/all_tasks.dart';
+import 'package:todo_application/widgets/reminder_tasks.dart';
 
 class ReminderTodoScreen extends StatelessWidget {
   @override
@@ -42,7 +42,7 @@ class ReminderTodoScreen extends StatelessWidget {
           )
         ],
       ),
-      body: AllTasks(),
+      body: ReminderTasks(),
     );
   }
 }

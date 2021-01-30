@@ -17,15 +17,26 @@ class QuickTodoList with ChangeNotifier{
     notifyListeners();
   }
 
-  void updateQuickTodo(QuickTodo quickTodo, String name, String date) {
+  void updateQuickTodo(QuickTodo quickTodo, String name) {
     quickTodo.name = name;
-    quickTodo.date = date;
-    // datebase 
+    dbhelper.updateQuickTodo(quickTodo);
     notifyListeners();
   }
 
   void addQuickTodo(QuickTodo quickTodo) {
     _quickTodoList.add(quickTodo);
+    dbhelper.insertQuickTodo(quickTodo);
+    notifyListeners();
+  }
+
+  void toggleCompletion(QuickTodo quickTodo) {
+    if (quickTodo.completed == 1) {
+      quickTodo.completed = quickTodo.completed - 1;
+      dbhelper.updateQuickTodo(quickTodo);
+    } else {
+      quickTodo.completed = quickTodo.completed + 1;
+      dbhelper.updateQuickTodo(quickTodo);
+    }
     notifyListeners();
   }
 }

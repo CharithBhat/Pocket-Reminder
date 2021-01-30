@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_application/database/dbhelper.dart';
-import 'package:todo_application/models/reminderTodo.dart';
-import 'package:todo_application/provider/notificationProvider.dart';
-import 'package:todo_application/provider/reminderTodo_list.dart';
-import 'package:todo_application/screens/edit_screen.dart';
+import 'package:todo_application/models/quickTodo.dart';
+import 'package:todo_application/provider/quickTodo_list.dart';
+import 'package:todo_application/screens/edit_quick_todo_screen.dart';
 
-class AllTasks extends StatefulWidget {
+class QuickTasks extends StatefulWidget {
   @override
-  _AllTasksState createState() => _AllTasksState();
+  _QuickTasksState createState() => _QuickTasksState();
 }
 
-class _AllTasksState extends State<AllTasks> {
+class _QuickTasksState extends State<QuickTasks> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // child: Padding(
-      //   padding: const EdgeInsets.only(top: 16.0, left: 16),
-      child: Consumer<ReminderTodoList>(
+      child: Consumer<QuickTodoList>(
         builder: (context, provider, child) {
           return ListView.builder(
-            itemCount: provider.reminderTodoList.length,
+            itemCount: provider.quickTodoList.length,
             itemBuilder: (BuildContext context, int index) {
-              return singleItem(index, provider.reminderTodoList[index], context);
+              return singleItem(
+                  index, provider.quickTodoList[index], context);
             },
           );
         },
@@ -32,7 +29,7 @@ class _AllTasksState extends State<AllTasks> {
   }
 
   Widget singleItem(int index, snapshot, BuildContext context) {
-    final provider = Provider.of<ReminderTodoList>(context, listen: false);
+    final provider = Provider.of<QuickTodoList>(context, listen: false);
     return ClipRect(
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
@@ -40,7 +37,7 @@ class _AllTasksState extends State<AllTasks> {
         actions: [
           IconSlideAction(
             color: Colors.green,
-            onTap: () => editReminderTodo(context, snapshot),
+            onTap: () => editQuickTodo(context, snapshot),
             caption: 'Edit',
             icon: Icons.edit,
           )
@@ -50,7 +47,7 @@ class _AllTasksState extends State<AllTasks> {
             color: Colors.red,
             caption: 'Delete',
             onTap: () {
-              provider.removeReminderTodo(snapshot);
+              provider.removeQuickTodo(snapshot);
               final snackBar = SnackBar(content: Text('Deleted'));
               Scaffold.of(context).showSnackBar(snackBar);
             },
@@ -104,25 +101,12 @@ class _AllTasksState extends State<AllTasks> {
       ),
     );
   }
-
-  void editReminderTodo(BuildContext context, ReminderTodo reminderTodo) {
+  
+  void editQuickTodo(BuildContext context, QuickTodo quickTodo) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EditScreen(reminderTodo: reminderTodo),
+        builder: (context) => EditQuickTodoScreen(quickTodo: quickTodo),
       ),
     );
-  }
-
-  void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
-    final dbhelper = DatabaseHelper.instance; 
-    dbhelper.deleteReminderTodo(reminderTodo.id); // new
-    // String polishedId = todo.id.substring(todo.id.length - 4);
-    // int specialId = int.parse(polishedId);
-    final snackBar = SnackBar(content: Text('Deleted'));
-    //var fltrNotification = new FlutterLocalNotificationsPlugin();
-    //await fltrNotification.cancel(0);
-    var fltrNotification = Notificationher().notific;
-    await fltrNotification.cancel(0);
-    Scaffold.of(context).showSnackBar(snackBar);
   }
 }

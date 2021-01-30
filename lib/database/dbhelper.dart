@@ -55,6 +55,7 @@ class DatabaseHelper {
         CREATE TABLE $tableQuickTodo(
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
+        completed INTEGER,
         date TEXT NOT NULL
       )
     ''');
@@ -76,7 +77,7 @@ class DatabaseHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
-
+ 
   //function to insert quick todo
   Future<void> insertQuickTodo(QuickTodo quickTodo) async {
     Database db = await instance.database;
@@ -130,6 +131,7 @@ class DatabaseHelper {
           id: maps[index]['id'],
           name: maps[index]['name'],
           date: maps[index]['date'],
+          completed: maps[index]['completed'],
         );
       },
     );
@@ -213,6 +215,17 @@ class DatabaseHelper {
       reminderTodo.toMap(),
       where: "id = ?",
       whereArgs: [reminderTodo.id],
+    );
+  }
+
+  Future<void> toggleQuickTodo(QuickTodo quickTodo) async {
+    final db = await instance.database;
+    quickTodo.completed == 1 ? quickTodo.completed = 0 : quickTodo.completed = 1;
+    await db.update(
+      tableQuickTodo,
+      quickTodo.toMap(),
+      where: "id = ?",
+      whereArgs: [quickTodo.id],
     );
   }
 }

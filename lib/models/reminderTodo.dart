@@ -21,5 +21,5 @@ class ReminderTodo {
       'completed' : completed,
       'date' : date,
     };
-  }
+  } 
 }
