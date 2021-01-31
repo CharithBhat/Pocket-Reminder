@@ -90,10 +90,7 @@ class _EnterMessageState extends State<EnterMessage> {
               ),
               child: Row(
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.face),
-                      color: Colors.black,
-                      onPressed: () {}),
+                  SizedBox(width: 15),
                   Expanded(
                     child: TextField(
                       controller: _controller,
@@ -110,29 +107,21 @@ class _EnterMessageState extends State<EnterMessage> {
                           border: InputBorder.none),
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.photo_camera, color: Colors.black),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.attach_file, color: Colors.black),
-                    onPressed: () {},
-                  )
                 ],
               ),
             ),
           ),
           SizedBox(width: 15),
-          Container(
-            padding: const EdgeInsets.all(15.0),
-            decoration:
-                BoxDecoration(color: Colors.green, shape: BoxShape.circle),
-            child: InkWell(
+          InkWell(
+            onTap: _enteredMessage.trim().isEmpty ? null : _sendMessage,
+            child: Container(
+              padding: const EdgeInsets.all(15.0),
+              decoration:
+                  BoxDecoration(color: Colors.green, shape: BoxShape.circle),
               child: Icon(
                 Icons.send,
                 color: Colors.white,
               ),
-              onTap: _enteredMessage.trim().isEmpty ? null : _sendMessage,
             ),
           )
 

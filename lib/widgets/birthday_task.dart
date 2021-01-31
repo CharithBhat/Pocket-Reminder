@@ -39,14 +39,18 @@ class _BirthdayTasksState extends State<BirthdayTasks> {
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
         key: Key(snapshot.id),
-        // actions: [
-        //   IconSlideAction(
-        //     color: Colors.green,
-        //     onTap: () => editReminderTodo(context, snapshot),
-        //     caption: 'Edit',
-        //     icon: Icons.edit,
-        //   )
-        // ],
+        actions: [
+          IconSlideAction(
+            color: Colors.red,
+            caption: 'Delete',
+            onTap: () {
+              provider.removeBirthdayTodo(snapshot);
+              final snackBar = SnackBar(content: Text('Deleted'));
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+            icon: Icons.delete,
+          )
+        ],
         secondaryActions: [
           IconSlideAction(
             color: Colors.red,

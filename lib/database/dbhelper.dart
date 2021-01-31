@@ -47,7 +47,9 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         completed INTEGER,
-        date TEXT NOT NULL
+        date TEXT NOT NULL,
+        remindDate NOT NULL,
+        remindTime NOT NULL
       )
       ''');
     await db.execute('''
@@ -112,6 +114,8 @@ class DatabaseHelper {
           title: maps[index]['title'],
           completed: maps[index]['completed'],
           date: maps[index]['date'],
+          remindDate: maps[index]['remindDate'],
+          remindTime: maps[index]['remindTime'],
         );
       },
     );

@@ -68,15 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.flash_on),
-            title: new Text('quickTodo'),
+            title: new Text('QuickTodo'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.all_inclusive),
-            title: new Text('All'),
+            icon: new Icon(Icons.notifications),
+            title: new Text('Reminders'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.done),
-            title: new Text('completed'),
+            icon: new Icon(Icons.cake),
+            title: new Text('Birthdays'),
           ),
         ],
       ),

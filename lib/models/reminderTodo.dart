@@ -3,12 +3,16 @@ class ReminderTodo {
   String title;
   int completed;
   String date;
+  String remindDate;
+  String remindTime;
 
   ReminderTodo({
     this.id,
     this.title,
     this.completed,
     this.date,
+    this.remindDate,
+    this.remindTime,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +21,8 @@ class ReminderTodo {
       'title': title,
       'completed': completed,
       'date': date,
+      'remindDate': remindDate,
+      'remindTime': remindTime,
     };
   }
 }

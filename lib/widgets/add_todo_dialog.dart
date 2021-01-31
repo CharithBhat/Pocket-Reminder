@@ -90,43 +90,41 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   Widget build(BuildContext context) {
     //var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: AlertDialog(
-        //insetPadding: EdgeInsets.symmetric(horizontal: 0)
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        content: Container(
-          //height: height,
-          width: width,
-          child: Form(
-            key: _formkey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Add todo'),
-                SizedBox(height: 8),
-                TodoFormWidget(
-                  onChangedTitle: (title) {
-                    setState(() {
-                      this.title = title;
-                    });
-                  },
-                  onSavedTodo: addTodo,
-                ),
-                ListTile(
-                  title: Text(
-                      "Date: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                  trailing: Icon(Icons.keyboard_arrow_down),
-                  onTap: _pickDate,
-                ),
-                ListTile(
-                  title: Text("Time: ${time.hour}:${time.minute}"),
-                  trailing: Icon(Icons.keyboard_arrow_down),
-                  onTap: _pickTime,
-                ),
-              ],
-            ),
+    return AlertDialog(
+      //insetPadding: EdgeInsets.symmetric(horizontal: 0)
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      content: Container(
+        //height: height,
+        width: width,
+        child: Form(
+          key: _formkey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Add todo'),
+              SizedBox(height: 8),
+              TodoFormWidget(
+                onChangedTitle: (title) {
+                  setState(() {
+                    this.title = title;
+                  });
+                },
+                onSavedTodo: addTodo,
+              ),
+              ListTile(
+                title: Text(
+                    "Date: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                trailing: Icon(Icons.keyboard_arrow_down),
+                onTap: _pickDate,
+              ),
+              ListTile(
+                title: Text("Time: ${time.hour}:${time.minute}"),
+                trailing: Icon(Icons.keyboard_arrow_down),
+                onTap: _pickTime,
+              ),
+            ],
           ),
         ),
       ),
@@ -164,6 +162,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
         id: DateTime.now().toIso8601String(),
         title: title,
         date: DateTime.now().toIso8601String(),
+        remindDate: pickedDate.toString(),
+        remindTime: time.toString(),
         completed: 0,
       );
       final provider = Provider.of<ReminderTodoList>(context, listen: false);

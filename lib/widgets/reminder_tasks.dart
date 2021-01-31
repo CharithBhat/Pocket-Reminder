@@ -33,7 +33,7 @@ class _ReminderTasksState extends State<ReminderTasks> {
 
   Widget singleItem(int index, snapshot, BuildContext context) {
     final provider = Provider.of<ReminderTodoList>(context, listen: false);
-    var _theDate = DateTime.parse(snapshot.date);
+    var _theDate = DateTime.parse(snapshot.remindDate);
     var _onlyDate = DateFormat('dd-MMM -yyyy').format(_theDate);
     return ClipRect(
       child: Slidable(
@@ -73,7 +73,9 @@ class _ReminderTasksState extends State<ReminderTasks> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   subtitle: Text(
-                    _onlyDate.toString(),
+                    _onlyDate.toString() +
+                        "  |  " +
+                        snapshot.remindTime.substring(10, 15).toString(),
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   leading: snapshot.completed == 1
