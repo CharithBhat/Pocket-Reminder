@@ -36,6 +36,7 @@ dependencies:
   shared_preferences:
   flutter_local_notifications:
   intl: 
+  empty_widget:
 
 dev_dependencies:
   flutter_test:

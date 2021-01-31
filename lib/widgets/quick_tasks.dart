@@ -1,3 +1,4 @@
+import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/models/quickTodo.dart';
 import 'package:todo_application/provider/quickTodo_list.dart';
 import 'package:todo_application/screens/edit_quick_todo_screen.dart';
+import 'package:todo_application/utilities/empty_list.dart';
 
 class QuickTasks extends StatefulWidget {
   @override
@@ -17,6 +19,11 @@ class _QuickTasksState extends State<QuickTasks> {
     return Container(
       child: Consumer<QuickTodoList>(
         builder: (context, provider, child) {
+          if (provider.quickTodoList.length == 0)
+            return Center(
+              child: EmptyList.empty(
+                  context, PackageImage.Image_3, null, 'You have no Tasks'),
+            );
           return ListView.builder(
             itemCount: provider.quickTodoList.length,
             itemBuilder: (BuildContext context, int index) {
