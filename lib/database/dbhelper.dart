@@ -62,7 +62,8 @@ class DatabaseHelper {
         CREATE TABLE $tableBirthdayTodo(
           id TEXT PRIMARY KEY,
           name TEXT NOT NULL,
-          date TEXT NOT NULL
+          date TEXT NOT NULL,
+          birthDate TEXT NOT NULL
         )
     ''');
   }
@@ -148,6 +149,7 @@ class DatabaseHelper {
           id: maps[index]['id'],
           name: maps[index]['name'],
           date: maps[index]['date'],
+          birthDate: maps[index]['birthDate']
         );
       },
     );

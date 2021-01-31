@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/screens/settings_screen.dart';
-import 'package:todo_application/widgets/add_todo_dialog.dart';
+import 'package:todo_application/widgets/Birthday_todo_dialog.dart';
+import 'package:todo_application/widgets/birthday_task.dart';
 
 class BirthdayTodoScreen extends StatelessWidget {
   @override
@@ -17,12 +18,12 @@ class BirthdayTodoScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add, color: Colors.white, size: 30),
-            tooltip: "add a Todo",
+            tooltip: "add a Birthday",
             onPressed: () {
               showDialog(
                 context: context,
                 barrierDismissible: true,
-                child: AddTodoDialog(),
+                child: BirthdayTodoDialog(),     // Do stuff
               );
             },
           ),
@@ -41,7 +42,7 @@ class BirthdayTodoScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(),
+      body: BirthdayTasks(), // change this
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/provider/app_theme_notifier.dart';
+import 'package:todo_application/provider/birthdayTodo_list.dart';
 import 'package:todo_application/provider/quickTodo_list.dart';
 import 'package:todo_application/provider/reminderTodo_list.dart';
 import 'package:todo_application/utilities/app_theme.dart';
@@ -24,12 +25,9 @@ void main() async {
             ChangeNotifierProvider<QuickTodoList>(
               create: (context) => QuickTodoList(),
             ),
-
-            // NEED  to add a birthday provider
-
-            // ChangeNotifierProvider<BirthdayTodoList>(
-            //   create: (context) => ReminderTodoList(),
-            // ),
+            ChangeNotifierProvider<BirthdayTodoList>(
+              create: (context) => BirthdayTodoList(),
+            ),
           ],
           child: MyApp(),
         ),
@@ -52,14 +50,19 @@ class _MyAppState extends State<MyApp> {
   void getitems() async {
     final provider = Provider.of<ReminderTodoList>(context, listen: false);
     final quickProvider = Provider.of<QuickTodoList>(context, listen: false);
+    final birthdayProvider = Provider.of<BirthdayTodoList>(context, listen: false);
     final dbhelper = DatabaseHelper.instance;
     final theList = await dbhelper.queryallReminderTodo();
     final quickTodoList = await dbhelper.queryallQuickTodo();
+    final birthdayTodoList = await dbhelper.queryallBirthdayTodo();
     for (var item in theList) {
       provider.addReminderTodo(item);
     }
     for(var item in quickTodoList){
       quickProvider.addQuickTodo(item);
+    }
+    for(var item in birthdayTodoList){
+      birthdayProvider.addBirthdayTodo(item);
     }
   }
 

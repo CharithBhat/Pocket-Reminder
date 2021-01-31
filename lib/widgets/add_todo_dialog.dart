@@ -34,30 +34,24 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     time = TimeOfDay.now();
   }
 
-  Future<void> _showNotification(
-      String title, String id) async {
-    var androidDetails = new AndroidNotificationDetails(
-        "bruhhhhh", "Something", "This is my channel",
-        importance: Importance.max, priority: Priority.high);
-    var iSODetails = new IOSNotificationDetails();
-    var generalNotificationDetails =
-        new NotificationDetails(android: androidDetails, iOS: iSODetails);
+  Future<void> _showNotification(String title, String id) async {
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'CHANNEL_ID',
+      'CHANNEL_NAME',
+      "CHANNEL_DESCRIPTION",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 5000,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidChannelSpecifics, iOS: iosChannelSpecifics);
     var scheduledTime;
-    // String polishedId = id.substring(id.length-4);
-    // int specialId = int.parse(polishedId);
+
     print(pickedDate);
     print(time);
-    // var datee =
-    //     pickedDate.add(Duration(hours: time.hour, minutes: time.minute));
-    // var actual = (datee.difference(DateTime.now())).inMinutes;
-    // scheduledTime = DateTime.now().add(Duration(minutes: actual));
-
-    // if (pickedDate.day == DateTime.now().day) {
-    //   scheduledTime = pickedDate.add(Duration(
-    //     hours: time.hour - DateTime.now().hour,
-    //     minutes: time.minute - DateTime.now().minute - 1,
-    //     seconds: 60 - DateTime.now().second,
-    //   ));
 
     if (pickedDate.day == DateTime.now().day) {
       scheduledTime = DateTime.now().add(Duration(
@@ -73,15 +67,14 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     print(DateTime.now());
     print(scheduledTime);
 
-    // scheduledTime = DateTime.now().add(Duration(
-    //     hours: time.hour - DateTime.now().hour,
-    //     minutes: time.minute - DateTime.now().minute));
-
-    // scheduledTime = DateTime.now().add(Duration(seconds: 5));
     var fltrNotification = Notificationher().notific; // herre
     fltrNotification.schedule(
-        0, title,"", scheduledTime, generalNotificationDetails,
+        0, title, "", scheduledTime, platformChannelSpecifics,
         androidAllowWhileIdle: true);
+
+    // fltrNotification.periodicallyShow(0, 'repeating title',
+    // 'repeating body', RepeatInterval.everyMinute, platformChannelSpecifics,
+    // androidAllowWhileIdle: true);
   }
 
   Future notificationSelected(String payload) async {
