@@ -31,6 +31,8 @@ class AppTheme {
       bodyText1: GoogleFonts.openSans(color: Colors.black, fontSize: 16),
       subtitle1: GoogleFonts.openSans(
           color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
+      subtitle2: GoogleFonts.openSans(
+          color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
       bodyText2: GoogleFonts.openSans(color: Colors.black, fontSize: 20),
       headline3: GoogleFonts.openSans(
           color: Colors.grey, fontSize: 16, fontWeight: FontWeight.bold),
@@ -64,6 +66,8 @@ class AppTheme {
       bodyText1: GoogleFonts.openSans(color: Colors.white, fontSize: 16),
       subtitle1: GoogleFonts.openSans(
           color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+      subtitle2: GoogleFonts.openSans(
+          color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
       bodyText2: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
       headline3: GoogleFonts.openSans(
           color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold),

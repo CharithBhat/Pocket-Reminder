@@ -93,6 +93,7 @@ class _EnterMessageState extends State<EnterMessage> {
                   SizedBox(width: 15),
                   Expanded(
                     child: TextField(
+                      style:  Theme.of(context).textTheme.subtitle2,   
                       controller: _controller,
                       textCapitalization: TextCapitalization.sentences,
                       autocorrect: true,
