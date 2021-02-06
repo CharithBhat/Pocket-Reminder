@@ -8,6 +8,7 @@ class BirthdayTodoList with ChangeNotifier {
   final dbhelper = DatabaseHelper.instance;
 
   List<BirthdayTodo> get birthdayTodoList {
+    _birthdayTodoList.sort((a, b) => a.name.compareTo(b.name));
     return _birthdayTodoList;
   }
 

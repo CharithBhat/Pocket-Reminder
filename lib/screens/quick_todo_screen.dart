@@ -105,7 +105,8 @@ class _EnterMessageState extends State<EnterMessage> {
                       },
                       decoration: InputDecoration(
                           hintText: "Type Something...",
-                          border: InputBorder.none),
+                          border: InputBorder.none,
+                          focusColor: Colors.black),
                     ),
                   ),
                 ],

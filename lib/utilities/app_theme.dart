@@ -22,15 +22,16 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: Colors.black,
     ),
-    cardColor: Colors.white,
+    hintColor: Colors.grey,
+    cardColor: Colors.white, 
     textTheme: TextTheme(
       headline1: GoogleFonts.openSans(color: Colors.black, fontSize: 30),
       headline2: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
       bodyText1: GoogleFonts.openSans(color: Colors.black, fontSize: 16),
       subtitle1: GoogleFonts.openSans(
-          color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       subtitle2: GoogleFonts.openSans(
-          color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       bodyText2: GoogleFonts.openSans(color: Colors.black, fontSize: 20),
       headline3: GoogleFonts.openSans(
           color: Colors.grey, fontSize: 16, fontWeight: FontWeight.bold),
@@ -48,6 +49,7 @@ class AppTheme {
           headline1: GoogleFonts.openSans(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
     ),
+    hintColor: Colors.grey,
     cardColor: Colors.black,
     splashColor: Colors.grey,
     //primaryColor: Colors.blue[900],
@@ -63,9 +65,9 @@ class AppTheme {
       headline2: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
       bodyText1: GoogleFonts.openSans(color: Colors.white, fontSize: 16),
       subtitle1: GoogleFonts.openSans(
-          color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
       subtitle2: GoogleFonts.openSans(
-          color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       bodyText2: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
       headline3: GoogleFonts.openSans(
           color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold),

@@ -1,4 +1,5 @@
 import 'package:empty_widget/empty_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -24,12 +25,14 @@ class _QuickTasksState extends State<QuickTasks> {
               child: EmptyList.empty(
                   context, PackageImage.Image_3, null, 'You have no Tasks'),
             );
-          return ListView.builder(
-            itemCount: provider.quickTodoList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return singleItem(
-                  index, provider.quickTodoList[index], context);
-            },
+          return CupertinoScrollbar(
+                      child: ListView.builder(
+              itemCount: provider.quickTodoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return singleItem(
+                    index, provider.quickTodoList[index], context);
+              },
+            ),
           );
         },
       ),

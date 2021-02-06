@@ -7,6 +7,7 @@ import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/birthdayTodo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 import 'package:todo_application/utilities/empty_list.dart';
+import 'dart:math';
 
 class BirthdayTasks extends StatefulWidget {
   @override
@@ -76,9 +77,6 @@ class _BirthdayTasksState extends State<BirthdayTasks> {
               Card(
                 margin: EdgeInsets.only(top: 5),
                 child: ListTile(
-                  // onTap: () {
-                  //   provider.toggleCompletion(snapshot);
-                  // },
                   title: Text(
                     snapshot.name,
                     style: Theme.of(context).textTheme.subtitle1,
@@ -87,29 +85,18 @@ class _BirthdayTasksState extends State<BirthdayTasks> {
                     _onlyDate.toString(),
                     style: Theme.of(context).textTheme.headline3,
                   ),
-                  // leading: snapshot.completed == 1
-                  //     ? Container(
-                  //         margin: EdgeInsets.all(5),
-                  //         color: Colors.green,
-                  //         child: Icon(
-                  //           Icons.check,
-                  //           color: Colors.white,
-                  //         ),
-                  //       )
-                  //     : Container(
-                  //         width: 25,
-                  //         height: 25,
-                  //         margin: EdgeInsets.all(5),
-                  //         decoration: BoxDecoration(
-                  //           border: Border.all(
-                  //             width: 3,
-                  //             color: Colors.green,
-                  //           ),
-                  //         ),
-                  //       ),
+                  leading: CircleAvatar(
+                    //backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                    backgroundColor: Colors.green,
+                    child: Center(
+                      child: Text(
+                        snapshot.name.substring(0, 1).toUpperCase(),
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              //Divider(thickness: 2),
             ],
           ),
         ),
