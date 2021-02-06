@@ -12,7 +12,7 @@ class AppTheme {
       // ),
       textTheme: TextTheme(
           headline1: GoogleFonts.openSans(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
     ),
     primaryColor: Colors.blue[900],
     brightness: Brightness.light,
@@ -25,9 +25,7 @@ class AppTheme {
     cardColor: Colors.white,
     textTheme: TextTheme(
       headline1: GoogleFonts.openSans(color: Colors.black, fontSize: 30),
-      headline2: GoogleFonts.openSans(
-          color: Colors.white,
-          fontSize: 20), // used for "Sign in with google" on the login page
+      headline2: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
       bodyText1: GoogleFonts.openSans(color: Colors.black, fontSize: 16),
       subtitle1: GoogleFonts.openSans(
           color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
@@ -48,7 +46,7 @@ class AppTheme {
       // ),
       textTheme: TextTheme(
           headline1: GoogleFonts.openSans(
-              color: Colors.white, fontSize: 23, fontWeight: FontWeight.w600)),
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
     ),
     cardColor: Colors.black,
     splashColor: Colors.grey,

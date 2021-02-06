@@ -12,12 +12,12 @@ class EmptyList{
     titleTextStyle: Theme.of(context)
         .typography
         .dense
-        .display1
+        .headline4
         .copyWith(color: Color(0xff9da9c7)),
     subtitleTextStyle: Theme.of(context)
         .typography
         .dense
-        .body2
+        .bodyText1
         .copyWith(color: Color(0xffabb8d6)));
   }
 }
