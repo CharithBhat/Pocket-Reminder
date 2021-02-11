@@ -1,4 +1,3 @@
-import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -6,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/birthdayTodo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
-import 'package:todo_application/utilities/empty_list.dart';
-import 'dart:math';
 
 class BirthdayTasks extends StatefulWidget {
   @override
@@ -24,8 +21,9 @@ class _BirthdayTasksState extends State<BirthdayTasks> {
         builder: (context, provider, child) {
           if (provider.birthdayTodoList.length == 0)
             return Center(
-              child: EmptyList.empty(
-                  context, PackageImage.Image_1, null, 'Add a few birthdays'),
+              // child: EmptyList.empty(
+              //     context, PackageImage.Image_1, null, 'Add a few birthdays'),
+              child: Text("No birthdays"),
             );
           return ListView.builder(
             itemCount: provider.birthdayTodoList.length,

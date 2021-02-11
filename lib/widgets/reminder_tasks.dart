@@ -1,4 +1,3 @@
-import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -6,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/models/reminderTodo.dart';
 import 'package:todo_application/provider/reminderTodo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
-import '../utilities/empty_list.dart';
 
 class ReminderTasks extends StatefulWidget {
   @override
@@ -23,8 +21,9 @@ class _ReminderTasksState extends State<ReminderTasks> {
         builder: (context, provider, child) {
           if (provider.reminderTodoList.length == 0)
             return Center(
-              child: EmptyList.empty(
-                  context, PackageImage.Image_2, null, 'No reminders set'),
+              // child: EmptyList.empty(
+              //     context, PackageImage.Image_2, null, 'No reminders set'),
+              child: Text("No reminders set"),
             );
           return ListView.builder(
             itemCount: provider.reminderTodoList.length,

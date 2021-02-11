@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/models/birthdayTodo.dart';
 import 'package:todo_application/provider/birthdayTodo_list.dart';
+import 'package:todo_application/provider/notificationProvider.dart';
 import 'package:todo_application/widgets/todo_form_widget.dart';
 
 class BirthdayTodoDialog extends StatefulWidget {
@@ -10,19 +12,25 @@ class BirthdayTodoDialog extends StatefulWidget {
 }
 
 class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
-
   final _formkey = GlobalKey<FormState>();
   String title = '';
   DateTime pickedDate;
-  // TimeOfDay time;
 
   @override
   void initState() {
     super.initState();
+    var androidInitilize =
+        new AndroidInitializationSettings('mipmap/ic_launcher');
+    var iOSinitilize = new IOSInitializationSettings();
+    var initilizationsSettings = new InitializationSettings(
+        android: androidInitilize, iOS: iOSinitilize);
+    var fltrNotification = Notificationher().notific; // here
+    //fltrNotification = new FlutterLocalNotificationsPlugin();
+    fltrNotification.initialize(initilizationsSettings,
+        onSelectNotification: notificationSelected);
     pickedDate = DateTime.now();
-    // time = TimeOfDay.now(); 
   }
- 
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -55,11 +63,6 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
                 trailing: Icon(Icons.keyboard_arrow_down),
                 onTap: _pickDate,
               ),
-              // ListTile(
-              //   title: Text("Time: ${time.hour}:${time.minute}"),
-              //   trailing: Icon(Icons.keyboard_arrow_down),
-              //   onTap: _pickTime,
-              // ),
             ],
           ),
         ),
@@ -80,14 +83,6 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       });
   }
 
-  // _pickTime() async {
-  //   TimeOfDay t = await showTimePicker(context: context, initialTime: time);
-  //   if (t != null)
-  //     setState(() {
-  //       time = t;
-  //     });
-  // }
-
   void addTodo() {
     final isValid = _formkey.currentState.validate();
 
@@ -103,7 +98,54 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       final provider = Provider.of<BirthdayTodoList>(context, listen: false);
       provider.addBirthdayTodo(todo);
       Navigator.of(context).pop();
-      // _showNotification(todo.title, todo.id);
+      _showNotification(todo.name + "says its his birthday", todo.id);
     }
+  }
+
+  Future<void> _showNotification(String title, String id) async {
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'CHANNEL_ID',
+      'CHANNEL_NAME',
+      "CHANNEL_DESCRIPTION",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 5000,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidChannelSpecifics, iOS: iosChannelSpecifics);
+    var scheduledTime;
+    int currentAge = DateTime.now().year - pickedDate.year;
+
+    print(pickedDate);
+    print(DateTime.now());
+    print(scheduledTime);
+
+    var fltrNotification = Notificationher().notific; // herre
+
+    fltrNotification.schedule(
+          0,
+          title,
+          "",
+          scheduledTime = pickedDate.add(
+            Duration(
+              days: currentAge * 365,
+            ),
+          ),
+          platformChannelSpecifics,
+          androidAllowWhileIdle: true);
+
+          print(scheduledTime);
+  }
+
+  Future notificationSelected(String payload) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Notification Clicked $payload"),
+      ),
+    );
   }
 }

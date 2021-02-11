@@ -9,7 +9,7 @@ import '../provider/notificationProvider.dart';
 class AddTodoDialog extends StatefulWidget {
   @override
   _AddTodoDialogState createState() => _AddTodoDialogState();
-}
+} 
 
 class _AddTodoDialogState extends State<AddTodoDialog> {
   final _formkey = GlobalKey<FormState>();

@@ -104,8 +104,8 @@ class DatabaseHelper {
   Future<List<ReminderTodo>> queryallReminderTodo() async {
     Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(tableReminderTodo);
-    print(maps);
-    print('thats all');
+    // print(maps);
+    // print('thats all');
     return List.generate(
       maps.length,
       (index) {
@@ -125,8 +125,8 @@ class DatabaseHelper {
   Future<List<QuickTodo>> queryallQuickTodo() async {
     Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(tableQuickTodo);
-    print(maps);
-    print('thats all');
+    // print(maps);
+    // print('thats all');
     return List.generate(
       maps.length,
       (index) {
@@ -144,8 +144,8 @@ class DatabaseHelper {
   Future<List<BirthdayTodo>> queryallBirthdayTodo() async {
     Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(tableBirthdayTodo);
-    print(maps);
-    print('thats all');
+    // print(maps);
+    // print('thats all');
     return List.generate(
       maps.length,
       (index) {
