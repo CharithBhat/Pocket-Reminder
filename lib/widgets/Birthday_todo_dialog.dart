@@ -98,7 +98,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       final provider = Provider.of<BirthdayTodoList>(context, listen: false);
       provider.addBirthdayTodo(todo);
       Navigator.of(context).pop();
-      _showNotification(todo.name + "says its his birthday", todo.id);
+      _showNotification("It's " + todo.name + "'s birthday", todo.id);
     }
   }
 
@@ -110,7 +110,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      timeoutAfter: 5000,
+      timeoutAfter: 60000 * 60 * 60,
       styleInformation: DefaultStyleInformation(true, true),
     );
     var iosChannelSpecifics = IOSNotificationDetails();
@@ -128,7 +128,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     fltrNotification.schedule(
           0,
           title,
-          "",
+          "he turned " + (DateTime.now().year - pickedDate.year).toString() + " today",
           scheduledTime = pickedDate.add(
             Duration(
               days: currentAge * 365,

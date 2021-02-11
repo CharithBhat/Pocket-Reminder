@@ -21,8 +21,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   @override
   void initState() {
     super.initState();
-    var androidInitilize =
-        new AndroidInitializationSettings('mipmap/ic_launcher');
+    //var androidInitilize =
+        //new AndroidInitializationSettings('mipmap/ic_launcher');
+    var androidInitilize = AndroidInitializationSettings('app_icon');
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
@@ -39,10 +40,10 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       'CHANNEL_ID',
       'CHANNEL_NAME',
       "CHANNEL_DESCRIPTION",
-      importance: Importance.max,
+      importance: Importance.high,
       priority: Priority.high,
       playSound: true,
-      timeoutAfter: 5000,
+      timeoutAfter: 60000 * 60 * 60,
       styleInformation: DefaultStyleInformation(true, true),
     );
     var iosChannelSpecifics = IOSNotificationDetails();
@@ -70,7 +71,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     var fltrNotification = Notificationher().notific; // herre
     fltrNotification.schedule(
         0, title, "", scheduledTime, platformChannelSpecifics,
-        androidAllowWhileIdle: true);
+        androidAllowWhileIdle: true, payload: 'test');
 
     // fltrNotification.periodicallyShow(0, 'repeating title',
     // 'repeating body', RepeatInterval.everyMinute, platformChannelSpecifics,
