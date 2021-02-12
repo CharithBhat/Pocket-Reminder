@@ -47,7 +47,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Add todo'),
+              Text('Add Birthday'),
               SizedBox(height: 8),
               TodoFormWidget(
                 onChangedTitle: (title) {
@@ -98,11 +98,16 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       final provider = Provider.of<BirthdayTodoList>(context, listen: false);
       provider.addBirthdayTodo(todo);
       Navigator.of(context).pop();
-      _showNotification("It's " + todo.name + "'s birthday", todo.id);
+      int currentAge = DateTime.now().year - pickedDate.year;
+      _showNotification("It's " + todo.name + "'s birthday", todo.id, currentAge * 365);
+      //_showNotification1("It's " + todo.name + "'s birthday", todo.id, (currentAge + 1) * 365);
+      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 2) * 365);
+      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 3) * 365);
+      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 4) * 365);
     }
   }
 
-  Future<void> _showNotification(String title, String id) async {
+  Future<void> _showNotification(String title, String id, int timePeriod) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID',
       'CHANNEL_NAME',
@@ -117,27 +122,67 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
     var scheduledTime;
-    int currentAge = DateTime.now().year - pickedDate.year;
+    
 
-    print(pickedDate);
-    print(DateTime.now());
-    print(scheduledTime);
+    // print(pickedDate);
+    // print(DateTime.now());
+    // print(scheduledTime);
 
     var fltrNotification = Notificationher().notific; // herre
 
     fltrNotification.schedule(
-          0,
+          DateTime.now().microsecond,
           title,
           "he turned " + (DateTime.now().year - pickedDate.year).toString() + " today",
           scheduledTime = pickedDate.add(
             Duration(
-              days: currentAge * 365,
+              days: timePeriod,
             ),
           ),
           platformChannelSpecifics,
           androidAllowWhileIdle: true);
 
           print(scheduledTime);
+  }
+
+  Future<void> _showNotification1(String title, String id, int timePeriod) async {
+    var androidChannelSpecificss = AndroidNotificationDetails(
+      '1',
+      'one',
+      "one desc",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 60000 * 60 * 60,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecificss = IOSNotificationDetails();
+    var platformChannelSpecificss = NotificationDetails(
+        android: androidChannelSpecificss, iOS: iosChannelSpecificss);
+    var scheduledTimes;
+    
+
+    // print(pickedDate);
+    // print(DateTime.now());
+    // print(scheduledTime);
+
+    //var fltrNotifications = Notificationher().notific; // herre
+    FlutterLocalNotificationsPlugin fltrNotificationss = new FlutterLocalNotificationsPlugin();
+
+
+    fltrNotificationss.schedule(
+          1,
+          title,
+          "he turned " + (DateTime.now().year - pickedDate.year + 1).toString() + " today",
+          scheduledTimes = pickedDate.add(
+            Duration(
+              days: timePeriod,
+            ),
+          ),
+          platformChannelSpecificss,
+          androidAllowWhileIdle: true);
+
+          print(scheduledTimes);
   }
 
   Future notificationSelected(String payload) async {

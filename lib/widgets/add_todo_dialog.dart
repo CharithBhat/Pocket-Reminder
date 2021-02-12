@@ -23,7 +23,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     super.initState();
     //var androidInitilize =
         //new AndroidInitializationSettings('mipmap/ic_launcher');
-    var androidInitilize = AndroidInitializationSettings('app_icon');
+    var androidInitilize = AndroidInitializationSettings('mipmap/ic_launcher');
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
@@ -70,7 +70,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
 
     var fltrNotification = Notificationher().notific; // herre
     fltrNotification.schedule(
-        0, title, "", scheduledTime, platformChannelSpecifics,
+        DateTime.now().microsecond, title, "", scheduledTime, platformChannelSpecifics,
         androidAllowWhileIdle: true, payload: 'test');
 
     // fltrNotification.periodicallyShow(0, 'repeating title',
