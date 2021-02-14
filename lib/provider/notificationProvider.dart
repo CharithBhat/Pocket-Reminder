@@ -7,3 +7,6 @@ class Notificationher {
     return _fltrNotification;
   }
 }
+
+
+// this needs to be turned into a singleton i think
