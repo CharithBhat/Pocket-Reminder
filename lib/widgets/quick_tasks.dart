@@ -22,7 +22,7 @@ class _QuickTasksState extends State<QuickTasks> {
             return Center(
               // child: EmptyList.empty(
               //     context, PackageImage.Image_3, null, 'You have no Tasks'),
-              child: Text("Looking quite empty in here"),
+              child: Text("Looking quite empty in here."),
             );
           return CupertinoScrollbar(
                       child: ListView.builder(

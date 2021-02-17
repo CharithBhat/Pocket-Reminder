@@ -1,9 +1,17 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Notificationher {
-  FlutterLocalNotificationsPlugin _fltrNotification = new FlutterLocalNotificationsPlugin();
+  Notificationher._privateConstructor();
+  
+  static final Notificationher _fltrNotification = Notificationher._privateConstructor();
 
-  FlutterLocalNotificationsPlugin get notific{
+  // FlutterLocalNotificationsPlugin get notific{
+  //   return _fltrNotification;
+  // }
+
+  FlutterLocalNotificationsPlugin instance = new FlutterLocalNotificationsPlugin();
+
+  factory Notificationher() {
     return _fltrNotification;
   }
 }

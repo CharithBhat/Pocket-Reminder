@@ -27,7 +27,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
-    var fltrNotification = Notificationher().notific; // here
+    var fltrNotification = Notificationher().instance; // here
     //fltrNotification = new FlutterLocalNotificationsPlugin();
     fltrNotification.initialize(initilizationsSettings,
         onSelectNotification: notificationSelected);
@@ -68,14 +68,14 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     print(DateTime.now());
     print(scheduledTime);
 
-    var fltrNotification = Notificationher().notific; // herre
-    fltrNotification.schedule(
-        DateTime.now().microsecond, title, "", scheduledTime, platformChannelSpecifics,
-        androidAllowWhileIdle: true, payload: 'test');
+    var fltrNotification = Notificationher().instance; // herre
+    // fltrNotification.schedule(
+    //     DateTime.now().microsecond, title, "", scheduledTime, platformChannelSpecifics,
+    //     androidAllowWhileIdle: true, payload: 'test');
 
-    // fltrNotification.periodicallyShow(0, 'repeating title',
-    // 'repeating body', RepeatInterval.everyMinute, platformChannelSpecifics,
-    // androidAllowWhileIdle: true);
+    fltrNotification.schedule(
+        int.parse(id), title, "", scheduledTime, platformChannelSpecifics,
+        androidAllowWhileIdle: true, payload: 'test');
   }
 
   Future notificationSelected(String payload) async {
@@ -160,7 +160,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       return;
     } else {
       final todo = ReminderTodo(
-        id: DateTime.now().toIso8601String(),
+        id: DateTime.now().microsecond.toString(),
         title: title,
         date: DateTime.now().toIso8601String(),
         remindDate: pickedDate.toString(),

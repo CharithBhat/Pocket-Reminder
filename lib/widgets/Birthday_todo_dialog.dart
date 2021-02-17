@@ -24,7 +24,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(
         android: androidInitilize, iOS: iOSinitilize);
-    var fltrNotification = Notificationher().notific; // here
+    var fltrNotification = Notificationher().instance; // here
     //fltrNotification = new FlutterLocalNotificationsPlugin();
     fltrNotification.initialize(initilizationsSettings,
         onSelectNotification: notificationSelected);
@@ -128,7 +128,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     // print(DateTime.now());
     // print(scheduledTime);
 
-    var fltrNotification = Notificationher().notific; // herre
+    var fltrNotification = Notificationher().instance; // herre
 
     fltrNotification.schedule(
           DateTime.now().microsecond,

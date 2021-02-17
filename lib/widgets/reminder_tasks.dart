@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_application/database/dbhelper.dart';
 import 'package:todo_application/models/reminderTodo.dart';
+import 'package:todo_application/provider/notificationProvider.dart';
 import 'package:todo_application/provider/reminderTodo_list.dart';
 import 'package:todo_application/screens/edit_screen.dart';
 
@@ -58,6 +60,7 @@ class _ReminderTasksState extends State<ReminderTasks> {
             color: Colors.red,
             caption: 'Delete',
             onTap: () {
+              deleteTodo(context, snapshot);
               provider.removeReminderTodo(snapshot);
               final snackBar = SnackBar(content: Text('Deleted'));
               Scaffold.of(context).showSnackBar(snackBar);
@@ -124,17 +127,17 @@ class _ReminderTasksState extends State<ReminderTasks> {
 
   // YO DONT FORGET THIS SHIT!!!!!!!!!!!!!!   Never called it thats why it wasn't deleting i guess...
 
-  // void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
-  //   final dbhelper = DatabaseHelper.instance;
-  //   dbhelper.deleteReminderTodo(reminderTodo.id); // new
-  //   // String polishedId = todo.id.substring(todo.id.length - 4);
-  //   // int specialId = int.parse(polishedId);
-  //   final snackBar = SnackBar(content: Text('Deleted'));
-  //   //var fltrNotification = new FlutterLocalNotificationsPlugin();
-  //   //await fltrNotification.cancel(0);
-  //   var fltrNotification = Notificationher().notific;
-  //   await fltrNotification.cancel(0);
-  //   Scaffold.of(context).showSnackBar(snackBar);
-  // }
+  void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
+    final dbhelper = DatabaseHelper.instance;
+    dbhelper.deleteReminderTodo(reminderTodo.id); // new
+    // String polishedId = todo.id.substring(todo.id.length - 4);
+    // int specialId = int.parse(polishedId);
+    //final snackBar = SnackBar(content: Text('Deleted'));
+    //var fltrNotification = new FlutterLocalNotificationsPlugin();
+    //await fltrNotification.cancel(0);
+    var fltrNotification = Notificationher().instance;
+    await fltrNotification.cancel(int.parse(reminderTodo.id));
+    //Scaffold.of(context).showSnackBar(snackBar);
+  }
 
 }
