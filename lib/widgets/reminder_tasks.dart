@@ -125,16 +125,9 @@ class _ReminderTasksState extends State<ReminderTasks> {
     );
   }
 
-  // YO DONT FORGET THIS SHIT!!!!!!!!!!!!!!   Never called it thats why it wasn't deleting i guess...
-
   void deleteTodo(BuildContext context, ReminderTodo reminderTodo) async {
     final dbhelper = DatabaseHelper.instance;
     dbhelper.deleteReminderTodo(reminderTodo.id); // new
-    // String polishedId = todo.id.substring(todo.id.length - 4);
-    // int specialId = int.parse(polishedId);
-    //final snackBar = SnackBar(content: Text('Deleted'));
-    //var fltrNotification = new FlutterLocalNotificationsPlugin();
-    //await fltrNotification.cancel(0);
     var fltrNotification = Notificationher().instance;
     await fltrNotification.cancel(int.parse(reminderTodo.id));
     //Scaffold.of(context).showSnackBar(snackBar);

@@ -99,7 +99,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       content: Container(
         //height: height,
         width: width,
-        child: Form(
+        child: Form( 
           key: _formkey,
           child: Column(
             mainAxisSize: MainAxisSize.min,

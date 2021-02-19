@@ -90,7 +90,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       return;
     } else {
       final todo = BirthdayTodo(
-        id: DateTime.now().toIso8601String(),
+        id: DateTime.now().microsecond.toString(),
         name: title,
         date: DateTime.now().toIso8601String(),
         birthDate: pickedDate.toString(),
@@ -100,10 +100,10 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
       Navigator.of(context).pop();
       int currentAge = DateTime.now().year - pickedDate.year;
       _showNotification("It's " + todo.name + "'s birthday", todo.id, currentAge * 365);
-      //_showNotification1("It's " + todo.name + "'s birthday", todo.id, (currentAge + 1) * 365);
-      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 2) * 365);
-      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 3) * 365);
-      // _showNotification("It's " + todo.name + "'s birthday", todo.id, (currentAge + 4) * 365);
+      _showNotification1("It's " + todo.name + "'s birthday", todo.id, (currentAge + 1) * 365);
+      _showNotification2("It's " + todo.name + "'s birthday", todo.id, (currentAge + 2) * 365);
+      _showNotification3("It's " + todo.name + "'s birthday", todo.id, (currentAge + 3) * 365);
+      _showNotification4("It's " + todo.name + "'s birthday", todo.id, (currentAge + 4) * 365);
     }
   }
 
@@ -131,7 +131,7 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     var fltrNotification = Notificationher().instance; // herre
 
     fltrNotification.schedule(
-          DateTime.now().microsecond,
+          int.parse(id),
           title,
           "he turned " + (DateTime.now().year - pickedDate.year).toString() + " today",
           scheduledTime = pickedDate.add(
@@ -166,12 +166,128 @@ class _BirthdayTodoDialogState extends State<BirthdayTodoDialog> {
     // print(DateTime.now());
     // print(scheduledTime);
 
-    //var fltrNotifications = Notificationher().notific; // herre
-    FlutterLocalNotificationsPlugin fltrNotificationss = new FlutterLocalNotificationsPlugin();
+    var fltrNotification = Notificationher().instance;
 
 
-    fltrNotificationss.schedule(
-          1,
+    fltrNotification.schedule(
+          int.parse(id + '1'),
+          title,
+          "he turned " + (DateTime.now().year - pickedDate.year + 1).toString() + " today",
+          scheduledTimes = pickedDate.add(
+            Duration(
+              days: timePeriod,
+            ),
+          ),
+          platformChannelSpecificss,
+          androidAllowWhileIdle: true);
+
+          print(scheduledTimes);
+  }
+
+  Future<void> _showNotification2(String title, String id, int timePeriod) async {
+    var androidChannelSpecificss = AndroidNotificationDetails(
+      '1',
+      'one',
+      "one desc",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 60000 * 60 * 60,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecificss = IOSNotificationDetails();
+    var platformChannelSpecificss = NotificationDetails(
+        android: androidChannelSpecificss, iOS: iosChannelSpecificss);
+    var scheduledTimes;
+    
+
+    // print(pickedDate);
+    // print(DateTime.now());
+    // print(scheduledTime);
+
+    var fltrNotification = Notificationher().instance;
+
+
+    fltrNotification.schedule(
+          int.parse(id + '2'),
+          title,
+          "he turned " + (DateTime.now().year - pickedDate.year + 1).toString() + " today",
+          scheduledTimes = pickedDate.add(
+            Duration(
+              days: timePeriod,
+            ),
+          ),
+          platformChannelSpecificss,
+          androidAllowWhileIdle: true);
+
+          print(scheduledTimes);
+  }
+
+  Future<void> _showNotification3(String title, String id, int timePeriod) async {
+    var androidChannelSpecificss = AndroidNotificationDetails(
+      '1',
+      'one',
+      "one desc",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 60000 * 60 * 60,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecificss = IOSNotificationDetails();
+    var platformChannelSpecificss = NotificationDetails(
+        android: androidChannelSpecificss, iOS: iosChannelSpecificss);
+    var scheduledTimes;
+    
+
+    // print(pickedDate);
+    // print(DateTime.now());
+    // print(scheduledTime);
+
+    var fltrNotification = Notificationher().instance;
+
+
+    fltrNotification.schedule(
+          int.parse(id + '3'),
+          title,
+          "he turned " + (DateTime.now().year - pickedDate.year + 1).toString() + " today",
+          scheduledTimes = pickedDate.add(
+            Duration(
+              days: timePeriod,
+            ),
+          ),
+          platformChannelSpecificss,
+          androidAllowWhileIdle: true);
+
+          print(scheduledTimes);
+  }
+
+  Future<void> _showNotification4(String title, String id, int timePeriod) async {
+    var androidChannelSpecificss = AndroidNotificationDetails(
+      '1',
+      'one',
+      "one desc",
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      timeoutAfter: 60000 * 60 * 60,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecificss = IOSNotificationDetails();
+    var platformChannelSpecificss = NotificationDetails(
+        android: androidChannelSpecificss, iOS: iosChannelSpecificss);
+    var scheduledTimes;
+    
+
+    // print(pickedDate);
+    // print(DateTime.now());
+    // print(scheduledTime);
+
+    var fltrNotification = Notificationher().instance;
+
+
+    fltrNotification.schedule(
+          int.parse(id + '4'),
           title,
           "he turned " + (DateTime.now().year - pickedDate.year + 1).toString() + " today",
           scheduledTimes = pickedDate.add(
