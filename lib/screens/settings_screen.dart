@@ -12,9 +12,10 @@ class SettingsScreen extends StatelessWidget {
           'Settings',
           style: Theme.of(context).appBarTheme.textTheme.headline1,
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
         backgroundColor: Theme.of(context).appBarTheme.color,
-        elevation: 0,
+        elevation: 2,
+        toolbarHeight: 50,
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),

@@ -27,6 +27,8 @@ class _EditQuickTodoScreenState extends State<EditQuickTodoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit'),
+        toolbarHeight: 50,
+        elevation: 2,
         actions: [
           IconButton(
             icon: Icon(Icons.delete),

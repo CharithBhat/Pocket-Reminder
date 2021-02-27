@@ -69,6 +69,7 @@ class TodoFormWidget extends StatelessWidget {
   Widget buildButton() {
     return RaisedButton(
       onPressed: onSavedTodo,
+      color: Colors.green,
       child: Text('Save'),
     );
   }

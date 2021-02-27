@@ -25,7 +25,7 @@ class _QuickTasksState extends State<QuickTasks> {
               child: Text("Looking quite empty in here."),
             );
           return CupertinoScrollbar(
-                      child: ListView.builder(
+            child: ListView.builder(
               itemCount: provider.quickTodoList.length,
               itemBuilder: (BuildContext context, int index) {
                 return singleItem(
@@ -40,7 +40,7 @@ class _QuickTasksState extends State<QuickTasks> {
 
   Widget singleItem(int index, snapshot, BuildContext context) {
     final provider = Provider.of<QuickTodoList>(context, listen: false);
-    var _theDate =  DateTime.parse(snapshot.date);
+    var _theDate = DateTime.parse(snapshot.date);
     var _onlyDate = DateFormat('dd-MMM -yyyy').format(_theDate);
     return ClipRect(
       child: Slidable(
@@ -60,7 +60,13 @@ class _QuickTasksState extends State<QuickTasks> {
             caption: 'Delete',
             onTap: () {
               provider.removeQuickTodo(snapshot);
-              final snackBar = SnackBar(content: Text('Deleted'));
+              final snackBar = SnackBar(
+                content: Text(
+                  'Deleted',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.black,
+              );
               Scaffold.of(context).showSnackBar(snackBar);
             },
             icon: Icons.delete,
@@ -114,7 +120,7 @@ class _QuickTasksState extends State<QuickTasks> {
       ),
     );
   }
-  
+
   void editQuickTodo(BuildContext context, QuickTodo quickTodo) {
     Navigator.of(context).push(
       MaterialPageRoute(

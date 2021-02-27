@@ -6,15 +6,17 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     appBarTheme: AppBarTheme(
-      color: Colors.blue[900],
-      // iconTheme: IconThemeData(
-      //   color: Colors.white,
-      // ),
+      //color: Colors.blue[900],
+      color: Colors.white,
+      
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       textTheme: TextTheme(
           headline1: GoogleFonts.openSans(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
     ),
-    primaryColor: Colors.blue[900],
+    primaryColor: Colors.white,
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     accentColor: Colors.white,
@@ -40,11 +42,7 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     appBarTheme: AppBarTheme(
-      color: Colors.blue[900],
-      //color: Colors.red,
-      // iconTheme: IconThemeData(
-      //   color: Colors.white,
-      // ),
+      color: Colors.grey[800],
       textTheme: TextTheme(
           headline1: GoogleFonts.openSans(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
@@ -53,10 +51,10 @@ class AppTheme {
     cardColor: Colors.black,
     splashColor: Colors.grey,
     //primaryColor: Colors.blue[900],
-    primaryColor: Colors.blue,
+    primaryColor: Colors.grey[800],
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
-    accentColor: Colors.white,
+    accentColor: Colors.black,
     iconTheme: IconThemeData(
       color: Colors.white,
     ),

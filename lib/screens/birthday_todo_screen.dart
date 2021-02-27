@@ -12,12 +12,13 @@ class BirthdayTodoScreen extends StatelessWidget {
           'Birthdays',
           style: Theme.of(context).appBarTheme.textTheme.headline1,
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
         backgroundColor: Theme.of(context).appBarTheme.color,
-        elevation: 0,
+        elevation: 1,
+        toolbarHeight: 50,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add, color: Colors.white, size: 30),
+            icon: Icon(Icons.add, size: 30),
             tooltip: "add a Birthday",
             onPressed: () {
               showDialog(

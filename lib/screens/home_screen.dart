@@ -63,6 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
       // ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+        selectedFontSize: 12,
+        backgroundColor: Theme.of(context).accentColor,
+        elevation: 0,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: [
@@ -73,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: new Icon(Icons.notifications),
             title: new Text('Reminders'),
+            
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.cake),

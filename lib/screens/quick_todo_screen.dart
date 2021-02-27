@@ -21,10 +21,12 @@ class _QuickTodoScreenState extends State<QuickTodoScreen> {
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).appBarTheme.color,
-        elevation: 0,
+        elevation: 1,
+        toolbarHeight: 50,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.settings),
+            icon:
+                Icon(Icons.settings, color: Theme.of(context).iconTheme.color),
             tooltip: "goes to the settings page",
             onPressed: () {
               Navigator.of(context).push(
@@ -93,7 +95,7 @@ class _EnterMessageState extends State<EnterMessage> {
                   SizedBox(width: 15),
                   Expanded(
                     child: TextField(
-                      style:  Theme.of(context).textTheme.subtitle2,   
+                      style: Theme.of(context).textTheme.subtitle2,
                       controller: _controller,
                       textCapitalization: TextCapitalization.sentences,
                       autocorrect: true,
